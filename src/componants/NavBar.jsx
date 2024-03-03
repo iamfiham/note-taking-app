@@ -27,10 +27,16 @@ function NavBar() {
             Add New <FaPlus />
           </button>
         </Link>
+      ) : location.pathname === "/edit" ? (
+        <Link to="/create">
+          <button>
+            Done <FaPlus />
+          </button>
+        </Link>
       ) : (
         <Link to="/">
           <button>
-            Done <FaPlus />
+            Back Home <FaPlus />
           </button>
         </Link>
       )}
