@@ -1,0 +1,13 @@
+*,
+::after,
+::before {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  list-style-type: none;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  scroll-behavior: smooth !important;
+  color: rgb(0, 0, 0, 0.87);
+}

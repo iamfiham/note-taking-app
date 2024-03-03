@@ -1,0 +1,42 @@
+.note-card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 300px;
+  border-radius: 12px;
+  position: relative;
+  background-color: white;
+}
+.note-card p {
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+.date {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.75rem;
+}
+.note-caption {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+.edit-icon {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  border-radius: 5rem;
+}
+.edit-icon svg {
+  font-size: 1.5rem;
+  stroke: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.note-heading {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  margin: 0.5rem 0rem 2rem;
+}

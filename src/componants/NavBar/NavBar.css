@@ -1,0 +1,25 @@
+.nav-bar {
+  width: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-bar button {
+  padding: 1em 2em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(26, 26, 26);
+  color: rgb(255, 255, 225, 0.87);
+  border-radius: 5rem;
+  cursor: pointer;
+}
+.nav-bar button:hover {
+  background-color: rgb(50, 50, 50);
+}
+.nav-bar button svg {
+  fill: rgb(255, 255, 225, 0.87);
+}
