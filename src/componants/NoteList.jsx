@@ -1,17 +1,13 @@
-import { useState } from "react";
 import NoteCard from "./NoteList/NoteCard";
 import "./NoteList/NoteList.css";
 
-function NoteList() {
-  const [notes, setNotes] = useState([]);
-
+function NoteList({ notes }) {
   return (
     <div>
       <div className="note-list">
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
+        {notes.map((note) => (
+          <NoteCard key={note.id} id={note.id} heading={note.heading} note={note.note} date={note.date} />
+        ))}
       </div>
     </div>
   );

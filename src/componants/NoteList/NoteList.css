@@ -1,8 +1,8 @@
 .note-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   background-color: #f6f8fa;
   padding: 4rem;
   width: 100%;
