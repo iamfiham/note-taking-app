@@ -2,41 +2,43 @@ import SearchBar from "./NavBar/SearchBar";
 import "./NavBar/NavBar.css";
 import { FaPlus } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import { FaNoteSticky } from "react-icons/fa6";
 
 function NavBar() {
   const location = useLocation();
 
   return (
     <div className="nav-bar">
-      <h2>notes.</h2>
+      <Link to="/">
+        <h2>
+          <FaNoteSticky />
+          notes.
+        </h2>
+      </Link>
       <SearchBar />
-      {/* <Link to="/create">
-        <button>
-          Add new <FaPlus />
-        </button>
-      </Link> */}
       {location.pathname === "/create" ? (
         <Link to="/">
           <button>
-            Save <FaPlus />
+            <IoIosArrowBack />
           </button>
         </Link>
       ) : location.pathname === "/" ? (
         <Link to="/create">
           <button>
-            Add New <FaPlus />
+            <FaPlus />
           </button>
         </Link>
       ) : location.pathname === "/edit" ? (
-        <Link to="/create">
+        <Link to="/">
           <button>
-            Done <FaPlus />
+            <IoIosArrowBack />
           </button>
         </Link>
       ) : (
         <Link to="/">
           <button>
-            Back Home <FaPlus />
+            <IoIosArrowBack />
           </button>
         </Link>
       )}

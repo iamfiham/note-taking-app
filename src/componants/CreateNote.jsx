@@ -24,9 +24,6 @@ function CreateNote({ setNotes }) {
       navigate("/");
     }
   };
-  // useEffect(() => {
-  //   submit();
-  // }, [title]);
   return (
     <div className="create-note">
       <form onSubmit={submit}>

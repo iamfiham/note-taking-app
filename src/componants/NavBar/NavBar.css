@@ -1,19 +1,25 @@
 .nav-bar {
   width: 100%;
-  padding: 2rem 2rem;
+  padding: 1.5rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 4rem;
 }
-.nav-bar button {
-  padding: 1em 2em;
-  font-size: 0.9rem;
-  font-weight: 700;
+.nav-bar h2 {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+.nav-bar h2 svg {
+  fill: rgb(99, 99, 255);
+}
+.nav-bar button {
+  padding: 1rem 1rem;
   background-color: rgb(26, 26, 26);
-  color: rgb(255, 255, 225, 0.87);
   border-radius: 5rem;
   cursor: pointer;
   transition: background-color 0.25s ease;
@@ -23,4 +29,6 @@
 }
 .nav-bar button svg {
   fill: rgb(255, 255, 225, 0.87);
+  font-size: 1rem;
+  scale: 1.25;
 }

@@ -20,9 +20,9 @@ function App() {
         <NavBar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<NoteList notes={notes} />} />
+            <Route path="/" element={<NoteList notes={notes} setNotes={setNotes} />} />
             <Route path="/create" element={<CreateNote setNotes={setNotes} />} />
-            <Route path="/edit/:id" element={<EditNote />} />
+            <Route path="/edit/:id" element={<EditNote notes={notes} setNotes={setNotes} />} />
           </Routes>
         </div>
       </div>

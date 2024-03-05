@@ -1,16 +1,26 @@
 .note-card {
-  padding: 2rem;
+  padding: 2rem 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   min-height: 250px;
-  border-radius: 12px;
   position: relative;
-  background-color: white;
+}
+.note-heading {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 1.25rem;
+  margin: 0.75rem 0rem 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .note-card p {
   letter-spacing: 0.5px;
-  font-weight: 300;
+  font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
 }
 .date {
@@ -18,9 +28,7 @@
 }
 .note-caption {
   line-height: 1.5;
-  font-size: 0.9rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -28,27 +36,32 @@
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.edit-icon {
-  position: absolute;
-  top: 3rem;
-  right: 3rem;
+.icons {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: yellow; */
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.icon {
   border-radius: 5rem;
   cursor: pointer;
-
   transition: background-color 0.25s ease;
+  display: block;
 }
-.edit-icon:hover {
+.icon:hover {
   background-color: rgba(96, 73, 228, 0.07);
 }
-.edit-icon svg {
+.icon svg {
   font-size: 1.5rem;
-  stroke: rgba(0, 0, 0, 0.7);
-  margin: 0.3rem;
+  margin: 0.5rem;
 }
 
-.note-heading {
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  font-size: 1.5rem;
-  margin: 0.5rem 0rem 2rem;
+.edit-icon svg {
+  stroke: rgba(0, 0, 0, 0.5);
+}
+.delete-icon svg {
+  fill: rgba(0, 0, 0, 0.5);
 }
