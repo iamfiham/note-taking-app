@@ -4,13 +4,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 4rem;
+  position: relative;
 }
 .nav-bar h2 {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25em;
+  letter-spacing: -1.25px;
+  font-size: 1.75rem;
   cursor: pointer;
   padding: 0.2rem;
 }
@@ -31,4 +34,5 @@
   fill: rgb(255, 255, 225, 0.87);
   font-size: 1rem;
   scale: 1.25;
+  display: block;
 }

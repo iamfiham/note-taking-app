@@ -1,20 +1,19 @@
 .note-card {
-  padding: 2rem 2rem 1.5rem;
+  padding: 1.5rem 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 350px;
+  min-height: 250px;
   position: relative;
-  box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.05), 0px 5px 10px -2.5px rgba(0, 0, 0, 0.075);
+  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(250, 250, 255);
 }
 .note-heading {
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.6px;
   font-size: 1.25rem;
-  margin: 0.75rem 0rem 1.5rem;
+  margin-bottom: 1.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -23,12 +22,15 @@
   -webkit-box-orient: vertical;
 }
 .note-card p {
-  letter-spacing: 0.5px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
 }
 .date {
   font-size: 0.75rem;
+  margin-bottom: 1em;
+  background-color: rgba(255, 0, 0, 0.075);
+  padding: 0.5em;
+  border-radius: 2px;
 }
 .note-caption {
   line-height: 1.5;
@@ -36,18 +38,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
   -webkit-box-orient: vertical;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .icons {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   /* background-color: yellow; */
   align-items: center;
   width: 100%;
   margin-top: auto;
+  gap: 0.5rem;
 }
 
 .icon {
@@ -61,7 +64,7 @@
 }
 .icon svg {
   font-size: 1.5rem;
-  margin: 0.5rem;
+  margin: 0.3em;
 }
 
 .edit-icon svg {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import NoteList from "./componants/NoteList";
 import EditNote from "./componants/EditNote";
 import CreateNote from "./componants/CreateNote";
@@ -15,7 +15,7 @@ function App() {
   }, [notes]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="app">
         <NavBar />
         <div className="container">
@@ -23,18 +23,11 @@ function App() {
             <Route path="/" element={<NoteList notes={notes} setNotes={setNotes} />} />
             <Route path="/create" element={<CreateNote setNotes={setNotes} />} />
             <Route path="/edit/:id" element={<EditNote notes={notes} setNotes={setNotes} />} />
-            <Route
-              path="*"
-              element={
-                <div className="error-div" style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>
-                  Error: Item not found
-                </div>
-              }
-            />
+            <Route path="*" element={<div style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>Error: Item not found</div>} />
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -17,4 +17,5 @@
 }
 html {
   background-color: white;
+  -webkit-text-size-adjust: 100%;
 }

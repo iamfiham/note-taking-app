@@ -1,4 +1,3 @@
-import SearchBar from "./NavBar/SearchBar";
 import "./NavBar/NavBar.css";
 import { FaPlus } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
@@ -13,10 +12,9 @@ function NavBar() {
       <Link to="/">
         <h2>
           <FaNoteSticky />
-          notes.
+          note.
         </h2>
       </Link>
-      {/* <SearchBar /> */}
       {location.pathname === "/create" ? (
         <Link to="/">
           <button>
