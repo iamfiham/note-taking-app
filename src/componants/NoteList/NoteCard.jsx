@@ -13,7 +13,7 @@ function NoteCard({ id, heading, note, date, color, setNotes }) {
   };
 
   return (
-    <div className="note-card" style={{ backgroundColor: `${color}` }}>
+    <div className="note-card">
       <p className="date">{date}</p>
       <h4 className="note-heading">{heading}</h4>
       <p className="note-caption">{note}</p>

@@ -23,6 +23,14 @@ function App() {
             <Route path="/" element={<NoteList notes={notes} setNotes={setNotes} />} />
             <Route path="/create" element={<CreateNote setNotes={setNotes} />} />
             <Route path="/edit/:id" element={<EditNote notes={notes} setNotes={setNotes} />} />
+            <Route
+              path="*"
+              element={
+                <div className="error-div" style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>
+                  Error: Item not found
+                </div>
+              }
+            />
           </Routes>
         </div>
       </div>

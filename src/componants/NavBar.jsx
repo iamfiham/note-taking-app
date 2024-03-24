@@ -16,7 +16,7 @@ function NavBar() {
           notes.
         </h2>
       </Link>
-      <SearchBar />
+      {/* <SearchBar /> */}
       {location.pathname === "/create" ? (
         <Link to="/">
           <button>

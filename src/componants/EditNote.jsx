@@ -9,7 +9,11 @@ function EditNote({ notes, setNotes }) {
   let { id } = useParams();
   const editnote = notes.find((note) => note.id === id);
   if (!editnote) {
-    return <div className="error-div">Error: Item not found</div>;
+    return (
+      <div className="error-div" style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>
+        Error: Item not found
+      </div>
+    );
   }
 
   useEffect(() => {
