@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./NoteCard.css";
-import { TbEdit } from "react-icons/tb";
-import { AiOutlineDelete } from "react-icons/ai";
+import { RiDeleteBin4Line } from "react-icons/ri";
+import { LuFileEdit } from "react-icons/lu";
 
 function NoteCard({ id, heading, note, date, color, setNotes }) {
   const deletenote = () => {
@@ -20,11 +20,11 @@ function NoteCard({ id, heading, note, date, color, setNotes }) {
       <div className="icons">
         <Link to={`/edit/${id}`}>
           <span className="edit-icon icon">
-            <TbEdit />
+            <LuFileEdit />
           </span>
         </Link>
         <span className="delete-icon icon" onClick={deletenote}>
-          <AiOutlineDelete />
+          <RiDeleteBin4Line />
         </span>
       </div>
     </div>
