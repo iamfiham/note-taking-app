@@ -1,5 +1,5 @@
 import NoteCard from "./NoteList/NoteCard";
-import "./NoteList/NoteList.css";
+import "./NoteList/NoteList.scss";
 
 function NoteList({ notes, setNotes }) {
   return (

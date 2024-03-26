@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./NoteCard.css";
+import "./NoteCard.scss";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { LuFileEdit } from "react-icons/lu";
 
