@@ -1,4 +1,4 @@
-import "./CreateNote.css";
+import "./CreateNote.scss";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -8,6 +8,12 @@ function EditNote({ notes, setNotes }) {
   const navigate = useNavigate();
   let { id } = useParams();
   const editnote = notes.find((note) => note.id === id);
+
+  useEffect(() => {
+    setTitle(editnote.heading);
+    setText(editnote.note);
+  }, []);
+
   if (!editnote) {
     return (
       <div className="error-div" style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>
@@ -15,11 +21,6 @@ function EditNote({ notes, setNotes }) {
       </div>
     );
   }
-
-  useEffect(() => {
-    setTitle(editnote.heading);
-    setText(editnote.note);
-  }, []);
 
   const submit = (e) => {
     e.preventDefault();

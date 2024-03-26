@@ -10,6 +10,14 @@ $black-50: rgba(0, 0, 0, 0.5);
   box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
+  transition: all 0.5s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    box-shadow: 0px 5px 25px -5px rgba(0, 0, 0, 0.1);
+    // transform: translateY(-5px);
+  }
 
   .date {
     font-size: 0.7rem;
@@ -46,7 +54,6 @@ $black-50: rgba(0, 0, 0, 0.5);
     -webkit-box-orient: vertical;
     margin-top: 0.85rem;
     margin-bottom: 1.7rem;
-    /* background-color: rgba(0, 0, 0, 0.034); */
     border-radius: 4px;
     width: 100%;
   }

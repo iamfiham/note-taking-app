@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./CreateNote.css";
+import "./CreateNote.scss";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
 
