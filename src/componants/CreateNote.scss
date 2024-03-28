@@ -14,7 +14,7 @@
 
     @mixin text-field($text-size: 1rem) {
       font-size: $text-size;
-      padding: 1rem;
+      padding: 0.75rem;
       border: solid 1px rgba(0, 0, 0, 0.1);
       border-radius: 7px;
       transition: border 0.2s ease;
@@ -27,15 +27,17 @@
     }
 
     input {
-      font-weight: 700;
       @include text-field;
+      color: rgba(0, 0, 0, 0.9);
+      font-weight: 600;
     }
 
     textarea {
-      resize: none;
-      line-height: 1.5;
-      // height: 250px;
       @include text-field;
+      color: rgba(0, 0, 0, 0.5);
+      resize: none;
+      color: rgba(0, 0, 0, 0.7);
+      line-height: 1.35;
     }
 
     button {
