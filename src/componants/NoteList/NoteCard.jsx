@@ -5,11 +5,18 @@ import { LuFileEdit } from "react-icons/lu";
 
 function NoteCard({ id, heading, note, date, color, setNotes }) {
   const deletenote = () => {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((item) => {
-        return item.id !== id;
-      });
-    });
+
+setNotes((prevNotes) => {
+    const index = prevNotes.findIndex((note) => note.id === id);
+    if (index !== -1) {
+      const updatedNotes = [...prevNotes];
+      updatedNotes.splice(index, 1);
+      return updatedNotes;
+    } else {
+      return prevNotes;
+    }
+  });
+
   };
 
   return (
