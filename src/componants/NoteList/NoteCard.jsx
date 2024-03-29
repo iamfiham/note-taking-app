@@ -8,11 +8,9 @@ function NoteCard({ id, heading, note, date, setNotes }) {
     setNotes((prevNotes) => {
       const index = prevNotes.findIndex((item) => item.id === id);
       const newNotes = [...prevNotes];
-
       if (index == -1) {
         return prevNotes;
       }
-
       newNotes.splice(index, 1);
       return newNotes;
     });

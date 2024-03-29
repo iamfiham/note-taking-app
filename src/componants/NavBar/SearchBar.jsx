@@ -7,14 +7,15 @@ function SearchBar() {
       style={{
         padding: "0.75rem 1.5rem",
         borderRadius: "5rem",
-        backgroundColor: " #f6f8fa",
+        backgroundColor: " white",
         display: "flex",
         alignItems: "center",
         gap: "0.75rem",
+        marginBottom: "2rem",
       }}
     >
       <IoSearchOutline />
-      <input type="text" placeholder="Search" style={{ backgroundColor: "transparent", width: "300px" }} />
+      <input type="text" placeholder="Search" style={{ backgroundColor: "transparent", width: "100%" }} />
     </div>
   );
 }
