@@ -39,7 +39,7 @@ $black-50: rgba(0, 0, 0, 0.5);
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    word-wrap: break-word;
+    word-break: break-word;
   }
   .note-caption {
     word-wrap: break-word;
@@ -56,6 +56,7 @@ $black-50: rgba(0, 0, 0, 0.5);
     margin-top: 0.85rem;
     margin-bottom: 1.7rem;
     border-radius: 4px;
+    word-break: break-word;
     width: 100%;
   }
 

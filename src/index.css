@@ -2,6 +2,7 @@
 *,
 ::after,
 ::before {
+  -webkit-tap-highlight-color: transparent;
   margin: 0px;
   padding: 0px;
   text-decoration: none;
