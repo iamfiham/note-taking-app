@@ -3,12 +3,18 @@ import "./NoteCard.scss";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { LuFileEdit } from "react-icons/lu";
 
-function NoteCard({ id, heading, note, date, color, setNotes }) {
+function NoteCard({ id, heading, note, date, setNotes }) {
   const deletenote = () => {
     setNotes((prevNotes) => {
-      return prevNotes.filter((item) => {
-        return item.id !== id;
-      });
+      const index = prevNotes.findIndex((item) => item.id === id);
+      const newNotes = [...prevNotes];
+
+      if (index == -1) {
+        return prevNotes;
+      }
+
+      newNotes.splice(index, 1);
+      return newNotes;
     });
   };
 

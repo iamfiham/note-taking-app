@@ -24,22 +24,27 @@ function EditNote({ notes, setNotes }) {
 
   const submit = (e) => {
     e.preventDefault();
-
-    if (title || text) {
-      setNotes((prevNotes) => {
-        return prevNotes.map((item) => {
-          if (item.id === id) {
-            return { ...item, heading: title ? title : "unknown", note: text };
-          }
-          return item;
-        });
-      });
-
-      navigate("/");
+    if (!title && !text) {
+      return;
     }
+
+    setNotes((prevNotes) => {
+      return prevNotes.map((item) => {
+        if (item.id !== id) {
+          return item;
+        }
+        return { ...item, heading: title.trim() ? title.trim() : "Unknown", note: text.trim() };
+      });
+    });
+    navigate("/");
   };
   return (
     <div className="create-note">
+      <div className="dots">
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+      </div>
       <form onSubmit={submit}>
         <input
           type="text"

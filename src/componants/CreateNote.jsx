@@ -11,21 +11,27 @@ function CreateNote({ setNotes }) {
   const submit = (e) => {
     e.preventDefault();
 
-    if (title || text) {
-      const newNote = {
-        id: uuid(),
-        heading: title ? title : "unknown",
-        note: text,
-        date: new Date().toLocaleString(),
-      };
-      setNotes((prev) => {
-        return [newNote, ...prev];
-      });
-      navigate("/");
+    if (!title.trim() && !text.trim()) {
+      return;
     }
+    const newNote = {
+      id: uuid(),
+      heading: title.trim() ? title.trim() : "Unknown",
+      note: text.trim(),
+      date: new Date().toLocaleString(),
+    };
+    setNotes((prevNotes) => {
+      return [newNote, ...prevNotes];
+    });
+    navigate("/");
   };
   return (
     <div className="create-note">
+      <div className="dots">
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+      </div>
       <form onSubmit={submit}>
         <input
           type="text"
