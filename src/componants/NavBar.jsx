@@ -1,4 +1,4 @@
-import "./NavBar/NavBar.css";
+import "./NavBar/NavBar.scss";
 import { FaPlus } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";

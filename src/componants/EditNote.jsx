@@ -1,13 +1,25 @@
 import "./CreateNote.scss";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 function EditNote({ notes, setNotes }) {
+  const editNoteRef = useRef(null);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const navigate = useNavigate();
   let { id } = useParams();
   const editnote = notes.find((note) => note.id === id);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      editNoteRef.current,
+      { y: 5, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.inOut" }
+    );
+  }, {});
 
   useEffect(() => {
     setTitle(editnote.heading);
@@ -16,7 +28,10 @@ function EditNote({ notes, setNotes }) {
 
   if (!editnote) {
     return (
-      <div className="error-div" style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}>
+      <div
+        className="error-div"
+        style={{ fontSize: "2rem", textAlign: "center", fontWeight: "700", padding: "3rem 1rem" }}
+      >
         Error: Item not found
       </div>
     );
@@ -39,7 +54,7 @@ function EditNote({ notes, setNotes }) {
     navigate("/");
   };
   return (
-    <div className="create-note">
+    <div className="create-note" ref={editNoteRef}>
       <div className="dots">
         <div className="dot"></div>
         <div className="dot"></div>

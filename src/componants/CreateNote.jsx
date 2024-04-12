@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreateNote.scss";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 function CreateNote({ setNotes }) {
+  const createNoteRef = useRef(null);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const navigate = useNavigate();
 
+  useGSAP(() => {
+    gsap.fromTo(
+      createNoteRef.current,
+      { y: 5, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.inOut" }
+    );
+  }, {});
+
+  // useEffect(() => {
+  //   gsap.fromTo(
+  //     createNote.current,
+  //     { y: 10, autoAlpha: 0 },
+  //     { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.inOut" }
+  //   );
+  //   return gsap.fromTo(
+  //     createNote.current,
+  //     { y: 0, autoAlpha: 1 },
+  //     { y: 30, autoAlpha: 0, duration: 1, ease: "power3.inOut" }
+  //   );
+  // }, []);
+
   const submit = (e) => {
     e.preventDefault();
-
     if (!title.trim() && !text.trim()) {
       return;
     }
@@ -25,8 +48,9 @@ function CreateNote({ setNotes }) {
     });
     navigate("/");
   };
+
   return (
-    <div className="create-note">
+    <div className="create-note" ref={createNoteRef}>
       <div className="dots">
         <div className="dot"></div>
         <div className="dot"></div>
