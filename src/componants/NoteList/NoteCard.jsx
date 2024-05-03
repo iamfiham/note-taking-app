@@ -7,24 +7,12 @@ const portalDom = document.getElementById('portal');
 import {createPortal} from 'react-dom';
 import {useState} from 'react';
 
-function NoteCard({id, heading, note, date, setNotes}) {
+function NoteCard({id, heading, note, date, deleteNote}) {
   const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
-
-  const deleteNote = () => {
-    setNotes((prevNotes) => {
-      const index = prevNotes.findIndex((item) => item.id === id);
-      const newNotes = [...prevNotes];
-      if (index == -1) {
-        return prevNotes;
-      }
-      newNotes.splice(index, 1);
-      return newNotes;
-    });
-  };
 
   return (
     <div className='note-card'>
-      {isDeleteModelOpen && createPortal(<DeleteModel deleteNote={deleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
+      {isDeleteModelOpen && createPortal(<DeleteModel id={id} deleteNote={deleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
       <p className='date'>{date}</p>
       <h4 className='note-heading'>{heading}</h4>
       <p className='note-caption'>{note}</p>

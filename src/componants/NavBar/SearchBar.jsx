@@ -1,22 +1,29 @@
-import { IoSearchOutline } from "react-icons/io5";
-import "./SearchBar.scss";
-import { IoClose } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
+import './SearchBar.scss';
+import {IoClose} from 'react-icons/io5';
+import {FiSearch} from 'react-icons/fi';
 
-function SearchBar({ searchTerm, setSearchTerm }) {
+function SearchBar({searchTerm, setSearchTerm}) {
   const clearSearchBox = () => {
-    setSearchTerm("");
+    setSearchTerm('');
   };
 
   return (
-    <div className="search-box">
+    <div className='search-box'>
       <span>
         <FiSearch />
       </span>
-      <input type="text" placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+      <input
+        type='text'
+        placeholder='Search'
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          window.scrollTo(0, 0);
+        }}
+      />
       {searchTerm ? (
         <span onClick={clearSearchBox}>
-          <IoClose id="closeButton" />
+          <IoClose id='closeButton' />
         </span>
       ) : null}
     </div>

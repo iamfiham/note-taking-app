@@ -43,11 +43,6 @@ function CreateNote({setNotes}) {
 
   return (
     <div className='create-note' ref={createNoteRef}>
-      <div className='dots'>
-        <div className='dot'></div>
-        <div className='dot'></div>
-        <div className='dot'></div>
-      </div>
       <form onSubmit={submit}>
         <input
           type='text'

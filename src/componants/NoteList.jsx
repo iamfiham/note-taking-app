@@ -6,9 +6,20 @@ import './NoteList/NoteList.scss';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
 
-function NoteList({notes, setNotes}) {
+function NoteList({notes, setNotes, searchTerm}) {
   const notesWrapper = useRef(null);
-  const [searchTerm, setSearchTerm] = useState('');
+
+  const deleteNote = (id) => {
+    setNotes((prevNotes) => {
+      const index = prevNotes.findIndex((item) => item.id === id);
+      const newNotes = [...prevNotes];
+      if (index == -1) {
+        return prevNotes;
+      }
+      newNotes.splice(index, 1);
+      return newNotes;
+    });
+  };
 
   const fuseOptions = {
     keys: ['heading', 'note'],
@@ -26,10 +37,9 @@ function NoteList({notes, setNotes}) {
 
   return (
     <div className='note-list-wrapper'>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className='note-list' ref={notesWrapper}>
         {searchResults.map((note) => (
-          <NoteCard key={note.id} id={note.id} heading={note.heading} note={note.note} date={note.date} setNotes={setNotes} />
+          <NoteCard key={note.id} id={note.id} heading={note.heading} deleteNote={deleteNote} note={note.note} date={note.date} />
         ))}
       </div>
       {searchResults.length == 0 && <div className='no-notes'>Empty Notes</div>}
