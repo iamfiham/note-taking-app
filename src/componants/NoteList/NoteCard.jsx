@@ -7,7 +7,7 @@ import {useState} from 'react';
 
 function NoteCard({id, heading, note, date, setIsDeleteModelOpen, setIdOfDeleteNote}) {
   return (
-    <div className='border border-solid note-card shadow-new border-neutral-50'>
+    <div className='border border-solid  note-card shadow-new border-neutral-50'>
       <h4 className='note-heading'>{heading}</h4>
       <p className='note-caption'>{note}</p>
       <div className='header'>

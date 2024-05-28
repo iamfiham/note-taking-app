@@ -1,5 +1,5 @@
 import {RiDeleteBinLine} from 'react-icons/ri';
-import useLogics from '../logicsAndContext/Logics';
+import useLogics from '../logicsAndContext/useLogics';
 
 const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
   const {deleteNote} = useLogics();

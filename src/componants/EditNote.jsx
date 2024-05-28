@@ -1,12 +1,16 @@
-import './CreateNote.scss';
-import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import gsap from 'gsap';
-import {useGSAP} from '@gsap/react';
 import {useRef} from 'react';
-import useLogics from '../logicsAndContext/Logics';
 import {useContext} from 'react';
+import {useEffect, useState} from 'react';
+
+import gsap from 'gsap';
+import {useNavigate, useParams} from 'react-router-dom';
+
+import {useGSAP} from '@gsap/react';
+
+import useLogics from '../logicsAndContext/useLogics';
 import {DataProvider} from '../logicsAndContext/Context';
+
+import './CreateNote.scss';
 
 function EditNote() {
   const {notes} = useContext(DataProvider);

@@ -1,9 +1,13 @@
-import {useState, useRef, useEffect} from 'react';
-import './CreateNote.scss';
-import {useNavigate} from 'react-router-dom';
+import {useEffect, useRef, useState} from 'react';
+
 import gsap from 'gsap';
+import {useNavigate} from 'react-router-dom';
+
 import {useGSAP} from '@gsap/react';
-import useLogics from '../logicsAndContext/Logics';
+
+import useLogics from '../logicsAndContext/useLogics';
+
+import './CreateNote.scss';
 
 function CreateNote() {
   const createNoteRef = useRef(null);
