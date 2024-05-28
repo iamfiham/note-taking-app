@@ -4,8 +4,12 @@ import {useNavigate, useParams} from 'react-router-dom';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
 import {useRef} from 'react';
+import useLogics from '../logicsAndContext/Logics';
+import {useContext} from 'react';
+import {DataProvider} from '../logicsAndContext/Context';
 
-function EditNote({notes, setNotes}) {
+function EditNote() {
+  const {notes} = useContext(DataProvider);
   const editNoteRef = useRef(null);
   const titleRef = useRef(null);
   const [title, setTitle] = useState('');
@@ -13,6 +17,7 @@ function EditNote({notes, setNotes}) {
   const navigate = useNavigate();
   let {id} = useParams();
   const editnote = notes.find((note) => note.id === id);
+  const {editNote} = useLogics();
 
   useGSAP(() => {
     gsap.fromTo(editNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
@@ -41,19 +46,11 @@ function EditNote({notes, setNotes}) {
     if (!title && !text) {
       return;
     }
-
-    setNotes((prevNotes) => {
-      return prevNotes.map((item) => {
-        if (item.id !== id) {
-          return item;
-        }
-        return {...item, heading: title.trim() ? title.trim() : 'Unknown', note: text.trim()};
-      });
-    });
+    editNote(id, title, text);
     navigate('/');
   };
   return (
-    <div className='create-note' ref={editNoteRef}>
+    <div className='create-note shadow-new' ref={editNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'

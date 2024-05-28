@@ -1,11 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "normalize.css";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import 'normalize.css';
+import './index.css';
+import Context from './logicsAndContext/Context.jsx';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <Context>
+      <App />
+    </Context>
   </React.StrictMode>
 );

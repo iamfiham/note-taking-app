@@ -1,8 +1,12 @@
 import './SearchBar.scss';
 import {IoClose} from 'react-icons/io5';
 import {FiSearch} from 'react-icons/fi';
+import {useContext} from 'react';
+import {DataProvider} from '../../logicsAndContext/Context';
 
-function SearchBar({searchTerm, setSearchTerm}) {
+function SearchBar() {
+  const {searchTerm, setSearchTerm} = useContext(DataProvider);
+
   const clearSearchBox = () => {
     setSearchTerm('');
   };

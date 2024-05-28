@@ -6,13 +6,13 @@ import {FaNoteSticky} from 'react-icons/fa6';
 import SearchBar from './NavBar/SearchBar';
 import {useEffect, useState} from 'react';
 
-function NavBar({searchTerm, setSearchTerm}) {
+function NavBar() {
   const location = useLocation();
   const [hasBoxShadow, setHasBoxShadow] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 30) {
         setHasBoxShadow(true);
         return;
       }
@@ -35,7 +35,7 @@ function NavBar({searchTerm, setSearchTerm}) {
         </Link>
         {location.pathname === '/' && (
           <span className='sm:block hidden w-[350px]'>
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <SearchBar />
           </span>
         )}
         {location.pathname === '/' ? (
@@ -53,8 +53,8 @@ function NavBar({searchTerm, setSearchTerm}) {
         )}
       </div>
       {location.pathname === '/' && (
-        <span className='sm:hidden block px-4 pt-8 pb-0 mx-auto w-full'>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <span className='block w-full px-4 pt-8 pb-0 mx-auto sm:hidden'>
+          <SearchBar />
         </span>
       )}
     </>

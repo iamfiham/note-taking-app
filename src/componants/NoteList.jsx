@@ -1,25 +1,14 @@
-import SearchBar from './NavBar/SearchBar';
 import NoteCard from './NoteList/NoteCard';
-import {useRef, useState} from 'react';
+import {useRef, useContext} from 'react';
 import Fuse from 'fuse.js';
 import './NoteList/NoteList.scss';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
+import {DataProvider} from '../logicsAndContext/Context';
 
-function NoteList({notes, setNotes, searchTerm}) {
+function NoteList() {
+  const {notes, searchTerm} = useContext(DataProvider);
   const notesWrapper = useRef(null);
-
-  const deleteNote = (id) => {
-    setNotes((prevNotes) => {
-      const index = prevNotes.findIndex((item) => item.id === id);
-      const newNotes = [...prevNotes];
-      if (index == -1) {
-        return prevNotes;
-      }
-      newNotes.splice(index, 1);
-      return newNotes;
-    });
-  };
 
   const fuseOptions = {
     keys: ['heading', 'note'],
@@ -38,9 +27,8 @@ function NoteList({notes, setNotes, searchTerm}) {
   return (
     <div className='note-list-wrapper'>
       <div className='note-list' ref={notesWrapper}>
-        {searchResults.map((note) => (
-          <NoteCard key={note.id} id={note.id} heading={note.heading} deleteNote={deleteNote} note={note.note} date={note.date} />
-        ))}
+        {searchResults.length !== 0 &&
+          searchResults.map((note) => <NoteCard key={note.id} id={note.id} heading={note.heading} note={note.note} date={note.date} />)}
       </div>
       {searchResults.length == 0 && <div className='no-notes'>Empty Notes</div>}
     </div>

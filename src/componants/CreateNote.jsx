@@ -1,16 +1,17 @@
 import {useState, useRef, useEffect} from 'react';
 import './CreateNote.scss';
-import {v4 as uuid} from 'uuid';
 import {useNavigate} from 'react-router-dom';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
+import useLogics from '../logicsAndContext/Logics';
 
-function CreateNote({setNotes}) {
+function CreateNote() {
   const createNoteRef = useRef(null);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const navigate = useNavigate();
   const titleRef = useRef(null);
+  const {newNote} = useLogics();
 
   useGSAP(() => {
     gsap.fromTo(createNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
@@ -29,20 +30,12 @@ function CreateNote({setNotes}) {
     if (!title.trim() && !text.trim()) {
       return;
     }
-    const newNote = {
-      id: uuid(),
-      heading: title.trim() ? title.trim() : 'Unknown',
-      note: text.trim(),
-      date: new Date().toLocaleString(),
-    };
-    setNotes((prevNotes) => {
-      return [newNote, ...prevNotes];
-    });
+    newNote(title, text);
     navigate('/');
   };
 
   return (
-    <div className='create-note' ref={createNoteRef}>
+    <div className='create-note shadow-new' ref={createNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'
