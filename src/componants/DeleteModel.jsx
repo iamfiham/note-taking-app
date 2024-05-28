@@ -1,7 +1,7 @@
 import {RiDeleteBinLine} from 'react-icons/ri';
 import useLogics from '../logicsAndContext/Logics';
 
-const DeleteModel = ({id, setIsDeleteModelOpen}) => {
+const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
   const {deleteNote} = useLogics();
 
   return (
@@ -15,7 +15,7 @@ const DeleteModel = ({id, setIsDeleteModelOpen}) => {
         <div className='grid w-full gap-2'>
           <button
             onClick={() => {
-              deleteNote(id);
+              deleteNote(idOfDeleteNote);
               setIsDeleteModelOpen(false);
             }}
             className='py-[0.5em] text-sm font-medium text-white transition-all bg-neutral-800 rounded-full shadow-sm hover:bg-neutral-900'>

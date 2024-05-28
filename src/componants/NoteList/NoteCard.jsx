@@ -2,18 +2,12 @@ import {Link} from 'react-router-dom';
 import './NoteCard.scss';
 import {RiDeleteBin4Line} from 'react-icons/ri';
 import {LuFileEdit} from 'react-icons/lu';
-import DeleteModel from '../DeleteModel';
-const portalDom = document.getElementById('portal');
-import {createPortal} from 'react-dom';
+
 import {useState} from 'react';
 
-function NoteCard({id, heading, note, date}) {
-  const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
-
+function NoteCard({id, heading, note, date, setIsDeleteModelOpen, setIdOfDeleteNote}) {
   return (
     <div className='border border-solid note-card shadow-new border-neutral-50'>
-      {isDeleteModelOpen && createPortal(<DeleteModel id={id} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
-
       <h4 className='note-heading'>{heading}</h4>
       <p className='note-caption'>{note}</p>
       <div className='header'>
@@ -24,7 +18,12 @@ function NoteCard({id, heading, note, date}) {
               <LuFileEdit />
             </span>
           </Link>
-          <span className='delete-icon icon' onClick={() => setIsDeleteModelOpen(true)}>
+          <span
+            className='delete-icon icon'
+            onClick={() => {
+              setIdOfDeleteNote(id);
+              setIsDeleteModelOpen(true);
+            }}>
             <RiDeleteBin4Line />
           </span>
         </div>

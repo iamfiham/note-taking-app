@@ -7,10 +7,10 @@ import useLogics from '../logicsAndContext/Logics';
 
 function CreateNote() {
   const createNoteRef = useRef(null);
+  const titleRef = useRef(null);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const navigate = useNavigate();
-  const titleRef = useRef(null);
   const {newNote} = useLogics();
 
   useGSAP(() => {

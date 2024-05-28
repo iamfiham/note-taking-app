@@ -1,14 +1,19 @@
 import NoteCard from './NoteList/NoteCard';
-import {useRef, useContext} from 'react';
+import {useRef, useContext, useState} from 'react';
 import Fuse from 'fuse.js';
 import './NoteList/NoteList.scss';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
 import {DataProvider} from '../logicsAndContext/Context';
+import DeleteModel from './DeleteModel';
+const portalDom = document.getElementById('portal');
+import {createPortal} from 'react-dom';
 
 function NoteList() {
   const {notes, searchTerm} = useContext(DataProvider);
   const notesWrapper = useRef(null);
+  const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
+  const [idOfDeleteNote, setIdOfDeleteNote] = useState('');
 
   const fuseOptions = {
     keys: ['heading', 'note'],
@@ -26,9 +31,20 @@ function NoteList() {
 
   return (
     <div className='note-list-wrapper'>
+      {isDeleteModelOpen && createPortal(<DeleteModel idOfDeleteNote={idOfDeleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
       <div className='note-list' ref={notesWrapper}>
         {searchResults.length !== 0 &&
-          searchResults.map((note) => <NoteCard key={note.id} id={note.id} heading={note.heading} note={note.note} date={note.date} />)}
+          searchResults.map((note) => (
+            <NoteCard
+              key={note.id}
+              id={note.id}
+              heading={note.heading}
+              note={note.note}
+              date={note.date}
+              setIsDeleteModelOpen={setIsDeleteModelOpen}
+              setIdOfDeleteNote={setIdOfDeleteNote}
+            />
+          ))}
       </div>
       {searchResults.length == 0 && <div className='no-notes'>Empty Notes</div>}
     </div>
