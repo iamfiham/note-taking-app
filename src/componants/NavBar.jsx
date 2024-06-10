@@ -1,14 +1,28 @@
-import './NavBar/NavBar.scss';
 import {FaPlus} from 'react-icons/fa6';
+import './NavBar/NavBar.scss';
 import {Link, useLocation} from 'react-router-dom';
-import {IoIosArrowBack} from 'react-icons/io';
 import {FaNoteSticky} from 'react-icons/fa6';
 import SearchBar from './NavBar/SearchBar';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
+import profilePic from '../assets/DummyUser.jpg';
+import ProfilePopup from './ProfilePopup';
+
+import {DataProvider} from '../context/Context';
+import {auth} from '../config/FireBaseConfig';
+import useSignInLogic from '../hooks/useSignInLogic';
 
 function NavBar() {
   const location = useLocation();
   const [hasBoxShadow, setHasBoxShadow] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const {isLogIn} = useContext(DataProvider);
+  const {logOut} = useSignInLogic();
+
+  const user = auth.currentUser;
+
+  const displayName = user?.displayName;
+  const email = user?.email;
+  const photoURL = user?.photoURL;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +41,19 @@ function NavBar() {
   return (
     <>
       <div className={`nav-bar ${hasBoxShadow && 'has-shadow'}`}>
+        {isLogIn && isProfileOpen && (
+          <ProfilePopup
+            componentStyle='absolute right-6 top-16'
+            displayName={displayName ? displayName : 'Unknown User'}
+            email={email}
+            logOut={logOut}
+            setIsProfileOpen={setIsProfileOpen}
+            photoURL={photoURL ? photoURL : profilePic}
+          />
+        )}
+
         <Link to='/'>
-          <h2>
+          <h2 className='logo'>
             <FaNoteSticky />
             note.
           </h2>
@@ -38,18 +63,33 @@ function NavBar() {
             <SearchBar />
           </span>
         )}
-        {location.pathname === '/' ? (
-          <Link to='/create'>
-            <button>
-              <FaPlus />
+
+        {isLogIn && location.pathname === '/' && (
+          <Link to='/create' className='navigation-link'>
+            <button className='navigation'>
+              <FaPlus /> New note
             </button>
           </Link>
+        )}
+
+        {isLogIn ? (
+          <img
+            src={photoURL ? photoURL : profilePic}
+            alt=''
+            className='aspect-square w-8 object-cover rounded-full cursor-pointer origin-[right_center]'
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+          />
         ) : (
-          <Link to='/'>
-            <button>
-              <IoIosArrowBack />
+          <div className='flex gap-2'>
+            <Link to='/sign-in'>
+              <button className=' font-medium border border-blue-300 text-blue-600 rounded-full px-[1.2em] py-[0.5em] border-solid text-sm hover:bg-blue-50 transition-all'>
+                Log In
+              </button>
+            </Link>
+            <button className='bg-blue-600 font-medium border border-blue-500 text-white rounded-full px-[1.2em] py-[0.5em] border-solid text-sm  hover:bg-blue-700 transition-all'>
+              Sign Up
             </button>
-          </Link>
+          </div>
         )}
       </div>
       {location.pathname === '/' && (

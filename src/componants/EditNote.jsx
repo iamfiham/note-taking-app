@@ -3,7 +3,7 @@ import {useContext} from 'react';
 import {useEffect, useState} from 'react';
 
 import gsap from 'gsap';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams, Link} from 'react-router-dom';
 
 import {useGSAP} from '@gsap/react';
 
@@ -75,7 +75,12 @@ function EditNote() {
           onChange={(e) => {
             setText(e.target.value);
           }}></textarea>
-        <button onSubmit={submit}>Save changes</button>
+        <div className='buttons'>
+          <button onSubmit={submit}>Create note</button>
+          <Link to='/'>
+            <button className='back-button'>Back</button>
+          </Link>
+        </div>
       </form>
     </div>
   );

@@ -1,0 +1,27 @@
+$blue: rgb(6, 90, 216);
+$screenBreakSize: 800px;
+
+.sign-in-page {
+  background-color: white;
+  display: grid;
+  place-items: center;
+  position: relative;
+
+  .sign-in-image {
+    padding: 0.75rem;
+    padding-right: 0px;
+    @media all and (max-width: $screenBreakSize) {
+      display: none;
+    }
+
+    div {
+      background-color: $blue;
+      height: 100%;
+      border-radius: 12px;
+    }
+  }
+  .main-content {
+    display: grid;
+    place-items: center;
+  }
+}

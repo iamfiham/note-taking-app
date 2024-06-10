@@ -1,0 +1,77 @@
+$black: rgba(0, 0, 0, 0.07);
+
+.card-placeholder {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.025), transparent) #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px -5px rgb(0, 0, 0, 0.085);
+
+  .imgph {
+    border-radius: 8px;
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin-bottom: 0.5rem;
+  }
+  .textph1 {
+    border-radius: 8px;
+    height: 15px;
+    width: 65%;
+  }
+  .textph2 {
+    border-radius: 8px;
+    height: 20px;
+    width: 90%;
+    margin-bottom: 0.5rem;
+  }
+  .textph3 {
+    border-radius: 8px;
+    height: 30px;
+    width: 100%;
+  }
+  .divph {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+    grid-auto-rows: 1fr;
+
+    .leftph {
+      border-radius: 8px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      div {
+        border-radius: 8px;
+        height: 12px;
+        &:nth-child(2) {
+          height: 20px;
+        }
+      }
+    }
+    .rightph {
+      border-radius: 50px;
+      width: 100%;
+    }
+  }
+}
+
+@keyframes skeletonAnimation {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.skeletonAnimation {
+  background: linear-gradient(120deg, $black 35%, rgba($black, 0.025) 50%, rgba($black, 0.025) 55%, $black 70%) #ffffff;
+  animation: skeletonAnimation 1.2s infinite linear;
+  background-size: 200% 100%;
+}

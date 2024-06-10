@@ -5,7 +5,7 @@ const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
   const {deleteNote} = useLogics();
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.35)] grid place-items-center z-[200]'>
+    <div className='fixed top-0 left-0 w-full h-full bg-black/50 grid place-items-center z-[200]'>
       <div className='flex flex-col items-center p-6 bg-neutral-50 rounded-lg shadow-lg w-[300px] border border-solid border-neutral-200'>
         <RiDeleteBinLine className='my-6 text-5xl fill-red-400' />
         <h2 className='mb-3 text-base font-semibold leading-none'>Delete Note</h2>

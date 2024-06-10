@@ -1,11 +1,11 @@
-import {useEffect, useRef, useState} from 'react';
-
 import gsap from 'gsap';
-import {useNavigate} from 'react-router-dom';
-
 import {useGSAP} from '@gsap/react';
 
+import {Link, useNavigate} from 'react-router-dom';
+import {useEffect, useRef, useState} from 'react';
+
 import useLogics from '../hooks/useLogics';
+import useUploadNote from '../hooks/useUploadNote';
 
 import './CreateNote.scss';
 
@@ -15,7 +15,8 @@ function CreateNote() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const navigate = useNavigate();
-  const {newNote} = useLogics();
+  const {setNewFireStoreDoc} = useUploadNote();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useGSAP(() => {
     gsap.fromTo(createNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
@@ -29,13 +30,17 @@ function CreateNote() {
     }, 0);
   }, []);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!title.trim() && !text.trim()) {
       return;
     }
-    newNote(title, text);
-    navigate('/');
+    const uploadTitle = title.trim() ? title.trim() : 'Unknown';
+    const uploadtext = text.trim();
+    setIsButtonDisabled(true);
+    const result = await setNewFireStoreDoc(uploadTitle, uploadtext);
+    setIsButtonDisabled(false);
+    result && navigate('/');
   };
 
   return (
@@ -60,7 +65,14 @@ function CreateNote() {
           onChange={(e) => {
             setText(e.target.value);
           }}></textarea>
-        <button onSubmit={submit}>Create note</button>
+        <div className='buttons'>
+          <button onSubmit={submit} disabled={isButtonDisabled}>
+            Create note
+          </button>
+          <Link to='/'>
+            <button className='back-button'>Back</button>
+          </Link>
+        </div>
       </form>
     </div>
   );

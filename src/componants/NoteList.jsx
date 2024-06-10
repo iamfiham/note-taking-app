@@ -9,9 +9,10 @@ import DeleteModel from './DeleteModel';
 const portalDom = document.getElementById('portal');
 import {createPortal} from 'react-dom';
 import ZoomUi from './ZoomUi';
+import PlaceHolderCollection from './placeHolders/PlaceHolderCollection';
 
 function NoteList() {
-  const {notes, searchTerm} = useContext(DataProvider);
+  const {notes, searchTerm, isLoading} = useContext(DataProvider);
   const notesWrapper = useRef(null);
   const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
   const [idOfDeleteNote, setIdOfDeleteNote] = useState('');
@@ -58,17 +59,26 @@ function NoteList() {
         {searchResults.length !== 0 &&
           searchResults.map((note) => (
             <NoteCard
-              key={note.id}
-              id={note.id}
-              heading={note.heading}
+              key={note.noteId}
+              id={note.noteId}
+              heading={note.title}
               note={note.note}
-              date={note.date}
+              date={note.createdAt}
               setIsDeleteModelOpen={setIsDeleteModelOpen}
               setIdOfDeleteNote={setIdOfDeleteNote}
             />
           ))}
       </div>
-      {searchResults.length == 0 ? searchTerm.trim() === '' ? <ZoomUi {...instructions.noNotes} /> : <ZoomUi {...instructions.noResult} /> : null}
+
+      {isLoading ? (
+        <PlaceHolderCollection />
+      ) : searchResults.length == 0 ? (
+        searchTerm.trim() === '' ? (
+          <ZoomUi {...instructions.noNotes} />
+        ) : (
+          <ZoomUi {...instructions.noResult} />
+        )
+      ) : null}
     </div>
   );
 }
