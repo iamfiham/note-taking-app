@@ -4,10 +4,11 @@ import Fuse from 'fuse.js';
 import './NoteList/NoteList.scss';
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
-import {DataProvider} from '../logicsAndContext/Context';
+import {DataProvider} from '../context/Context';
 import DeleteModel from './DeleteModel';
 const portalDom = document.getElementById('portal');
 import {createPortal} from 'react-dom';
+import ZoomUi from './ZoomUi';
 
 function NoteList() {
   const {notes, searchTerm} = useContext(DataProvider);
@@ -29,6 +30,27 @@ function NoteList() {
     }
   }, [searchResults]);
 
+  const instructions = {
+    noNotes: {
+      titleTip: 'Start a New Note',
+      subTitleTip: (
+        <>
+          No notes yet. Start writing, brand your notes <br /> will appear here for you to view and edit.
+        </>
+      ),
+      needButton: true,
+    },
+    noResult: {
+      titleTip: 'No notes found',
+      subTitleTip: (
+        <>
+          No notes match your search. Try different keywords <br /> or create a new note to get started.
+        </>
+      ),
+      needButton: false,
+    },
+  };
+
   return (
     <div className='note-list-wrapper'>
       {isDeleteModelOpen && createPortal(<DeleteModel idOfDeleteNote={idOfDeleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
@@ -46,7 +68,7 @@ function NoteList() {
             />
           ))}
       </div>
-      {searchResults.length == 0 && <div className='no-notes'>Empty Notes</div>}
+      {searchResults.length == 0 ? searchTerm.trim() === '' ? <ZoomUi {...instructions.noNotes} /> : <ZoomUi {...instructions.noResult} /> : null}
     </div>
   );
 }

@@ -8,8 +8,7 @@ $black: rgba(0, 0, 0);
   align-items: flex-start;
   min-height: 300px;
   position: relative;
-  border-radius: 8px;
-  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
   transition: all 0.25s ease;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -55,16 +54,15 @@ $black: rgba(0, 0, 0);
 
       .edit-icon svg {
         stroke: rgba(150, 150, 255, 0.75);
-        stroke: rgba($black, 0.3);
+        stroke: rgba($black, 0.5);
       }
       .delete-icon svg {
-        fill: rgba(red, 0.5);
-        fill: rgba($black, 0.3);
+        fill: rgba($black, 0.5);
       }
     }
   }
   .note-heading {
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.6px;
     font-size: 1.2rem;
     line-height: 1.25;
@@ -79,7 +77,7 @@ $black: rgba(0, 0, 0);
   .note-caption {
     word-wrap: break-word;
     font-weight: 400;
-    color: rgba($black, 0.6);
+    color: rgba($black, 0.5);
     line-height: 1.4;
     font-size: 0.85rem;
     margin-top: 1rem;

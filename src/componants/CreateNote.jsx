@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 import {useGSAP} from '@gsap/react';
 
-import useLogics from '../logicsAndContext/useLogics';
+import useLogics from '../hooks/useLogics';
 
 import './CreateNote.scss';
 
@@ -39,11 +39,11 @@ function CreateNote() {
   };
 
   return (
-    <div className='create-note shadow-new' ref={createNoteRef}>
+    <div className='create-note' ref={createNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'
-          placeholder='Title Here ...'
+          placeholder='Enter note title here'
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
@@ -55,12 +55,12 @@ function CreateNote() {
           id=''
           cols='30'
           rows='10'
-          placeholder='Text Here ...'
+          placeholder='Write your note here...'
           value={text}
           onChange={(e) => {
             setText(e.target.value);
           }}></textarea>
-        <button onSubmit={submit}>Save</button>
+        <button onSubmit={submit}>Create note</button>
       </form>
     </div>
   );

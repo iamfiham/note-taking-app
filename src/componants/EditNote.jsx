@@ -7,8 +7,8 @@ import {useNavigate, useParams} from 'react-router-dom';
 
 import {useGSAP} from '@gsap/react';
 
-import useLogics from '../logicsAndContext/useLogics';
-import {DataProvider} from '../logicsAndContext/Context';
+import useLogics from '../hooks/useLogics';
+import {DataProvider} from '../context/Context';
 
 import './CreateNote.scss';
 
@@ -54,7 +54,7 @@ function EditNote() {
     navigate('/');
   };
   return (
-    <div className='create-note shadow-new' ref={editNoteRef}>
+    <div className='create-note' ref={editNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'
@@ -75,7 +75,7 @@ function EditNote() {
           onChange={(e) => {
             setText(e.target.value);
           }}></textarea>
-        <button onSubmit={submit}>Save</button>
+        <button onSubmit={submit}>Save changes</button>
       </form>
     </div>
   );

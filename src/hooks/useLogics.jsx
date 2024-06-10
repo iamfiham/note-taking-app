@@ -1,6 +1,6 @@
 import {v4 as uuid} from 'uuid';
 import {useContext} from 'react';
-import {DataProvider} from './Context';
+import {DataProvider} from '../context/Context';
 
 function useLogics() {
   const {setNotes} = useContext(DataProvider);

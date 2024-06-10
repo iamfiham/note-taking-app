@@ -53,7 +53,7 @@ function NavBar() {
         )}
       </div>
       {location.pathname === '/' && (
-        <span className='block w-full px-4 pt-8 pb-0 mx-auto sm:hidden'>
+        <span className='block w-full px-4 pt-4 pb-0 mx-auto sm:hidden'>
           <SearchBar />
         </span>
       )}
