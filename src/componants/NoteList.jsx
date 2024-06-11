@@ -12,13 +12,13 @@ import ZoomUi from './ZoomUi';
 import PlaceHolderCollection from './placeHolders/PlaceHolderCollection';
 
 function NoteList() {
-  const {notes, searchTerm, isLoading} = useContext(DataProvider);
+  const {notes, searchTerm, isFetchLoading} = useContext(DataProvider);
   const notesWrapper = useRef(null);
   const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
   const [idOfDeleteNote, setIdOfDeleteNote] = useState('');
 
   const fuseOptions = {
-    keys: ['heading', 'note'],
+    keys: ['title', 'note'],
     threshold: 0.5,
     ignoreCase: true,
   };
@@ -56,11 +56,12 @@ function NoteList() {
     <div className='note-list-wrapper'>
       {isDeleteModelOpen && createPortal(<DeleteModel idOfDeleteNote={idOfDeleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
       <div className='note-list' ref={notesWrapper}>
-        {searchResults.length !== 0 &&
+        {!isFetchLoading &&
+          searchResults.length !== 0 &&
           searchResults.map((note) => (
             <NoteCard
-              key={note.noteId}
-              id={note.noteId}
+              key={note.id}
+              id={note.id}
               heading={note.title}
               note={note.note}
               date={note.createdAt}
@@ -70,7 +71,7 @@ function NoteList() {
           ))}
       </div>
 
-      {isLoading ? (
+      {isFetchLoading ? (
         <PlaceHolderCollection />
       ) : searchResults.length == 0 ? (
         searchTerm.trim() === '' ? (

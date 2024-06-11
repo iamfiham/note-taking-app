@@ -1,8 +1,17 @@
 import {RiDeleteBinLine} from 'react-icons/ri';
-import useLogics from '../hooks/useLogics';
+import useUploadNote from '../hooks/useUploadNote';
+import {useState} from 'react';
 
 const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
-  const {deleteNote} = useLogics();
+  const {deleteFireStoreDoc} = useUploadNote();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const deleteNote = async () => {
+    setIsButtonDisabled(true);
+    await deleteFireStoreDoc(idOfDeleteNote);
+    setIsDeleteModelOpen(false);
+    setIsButtonDisabled(false);
+  };
 
   return (
     <div className='fixed top-0 left-0 w-full h-full bg-black/50 grid place-items-center z-[200]'>
@@ -14,11 +23,9 @@ const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
         </h4>
         <div className='grid w-full gap-2'>
           <button
-            onClick={() => {
-              deleteNote(idOfDeleteNote);
-              setIsDeleteModelOpen(false);
-            }}
-            className='py-[0.5em] text-sm font-medium text-white transition-all bg-neutral-800 rounded-full shadow-sm hover:bg-neutral-900'>
+            onClick={deleteNote}
+            disabled={isButtonDisabled}
+            className='py-[0.5em] text-sm font-medium text-white transition-all bg-neutral-800 rounded-full shadow-sm hover:bg-neutral-900 disabled:cursor-not-allowed disabled:opacity-50'>
             Remove
           </button>
           <button

@@ -8,23 +8,22 @@ const DataProvider = createContext();
 function Context({children}) {
   const [notes, setNotes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFetchLoading, setIsFetchLoading] = useState(true);
   const [isLogIn, setIsLogIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [dataChange, setDataChange] = useState(0);
-
-  const value = {notes, setNotes, searchTerm, setSearchTerm, setDataChange, isLoading, isLogIn, userId};
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const listener = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setIsLogIn(true);
         setUserId(user.uid);
-        console.log(userId);
       } else {
         setIsLogIn(false);
         setUserId(null);
       }
+      setAuthLoading(false);
     });
     return () => {
       listener();
@@ -34,24 +33,26 @@ function Context({children}) {
   useEffect(() => {
     const getFireStoreDocs = async () => {
       try {
-        setIsLoading(true);
+        setIsFetchLoading(true);
         const notesCollection = query(collection(db, 'Notes'), where('userId', '==', userId), orderBy('createdAt', 'desc'));
         const querySnapshot = await getDocs(notesCollection);
 
         const notesArray = [];
         querySnapshot.forEach((doc) => {
           const createdAt = doc.data().createdAt.toDate().toLocaleString();
-          notesArray.push({...doc.data(), createdAt});
+          notesArray.push({id: doc.id, ...doc.data(), createdAt});
         });
         setNotes(() => [...notesArray]);
-        setIsLoading(false);
+        setIsFetchLoading(false);
       } catch (err) {
         console.log(err);
-        setIsLoading(false);
+        setIsFetchLoading(false);
       }
     };
     getFireStoreDocs();
   }, [userId, dataChange]);
+
+  const value = {notes, setNotes, searchTerm, setSearchTerm, setDataChange, isFetchLoading, isLogIn, userId, authLoading};
 
   return <DataProvider.Provider value={value}>{children}</DataProvider.Provider>;
 }

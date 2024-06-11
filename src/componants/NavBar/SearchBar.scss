@@ -1,8 +1,9 @@
 .search-box {
-  padding: 0.25rem 0.3rem;
+  padding: 0.1rem;
   border-radius: 5rem;
-  background-color: rgba(0, 0, 0, 0.02);
   display: flex;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.075);
   align-items: center;
   gap: 0.25rem;
   justify-content: center;
@@ -11,7 +12,7 @@
   input {
     background-color: transparent;
     width: 100%;
-    font-size: 0.85rem;
+    font-size: 1rem;
     padding: 0.2rem;
     padding-left: 0.5rem;
     font-weight: 500;
@@ -33,12 +34,12 @@
 
     svg {
       display: block;
-      stroke: rgba(0, 0, 0, 0.5);
+      stroke: rgba(0, 0, 0, 0.3);
       scale: 1.1;
     }
     #closeButton {
       display: block;
-      fill: rgba(0, 0, 0, 0.5);
+      fill: rgba(0, 0, 0, 0.3);
       scale: 1.25;
     }
   }

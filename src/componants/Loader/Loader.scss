@@ -1,4 +1,4 @@
-$blue: rgb(6, 90, 216);
+$blue: rgb(30, 30, 30);
 
 // loader
 .loader-div {
@@ -6,6 +6,7 @@ $blue: rgb(6, 90, 216);
   display: grid;
   place-items: center;
   background-color: white;
+  scale: 0.75;
 }
 .square-circle-5 {
   width: 65px;

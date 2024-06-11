@@ -4,7 +4,6 @@ import {useGSAP} from '@gsap/react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
-import useLogics from '../hooks/useLogics';
 import useUploadNote from '../hooks/useUploadNote';
 
 import './CreateNote.scss';

@@ -1,34 +1,39 @@
-.nav-bar.has-shadow {
+.nav-bar-wrapper.has-shadow {
   box-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.02), 0px 4px 8px -1px rgb(0, 0, 0, 0.02), 0px 8px 16px -2px rgb(0, 0, 0, 0.02);
 }
-
-.nav-bar {
+.nav-bar-wrapper {
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease;
+  z-index: 99;
+  background-color: white;
   width: 100%;
-  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.nav-bar {
+  width: min(1280px, 92%);
+  margin-inline: auto;
+  padding-block: 0.75rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
   position: relative;
   background-color: white;
-  position: sticky;
-  top: 0;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0);
-  transition: box-shadow 0.3s ease;
-  z-index: 99;
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.25em;
     letter-spacing: -1.25px;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     cursor: pointer;
     padding: 0.2rem;
     font-weight: 600;
 
     svg {
-      fill: rgb(99, 99, 255);
+      fill: black;
     }
   }
   .navigation-link {

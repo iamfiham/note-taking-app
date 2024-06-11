@@ -7,12 +7,6 @@ function PlaceHolderCollection() {
       <ProductCardPlaceHolder />
       <ProductCardPlaceHolder />
       <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
-      <ProductCardPlaceHolder />
     </div>
   );
 }

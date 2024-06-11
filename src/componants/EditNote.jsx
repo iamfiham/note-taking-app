@@ -7,10 +7,10 @@ import {useNavigate, useParams, Link} from 'react-router-dom';
 
 import {useGSAP} from '@gsap/react';
 
-import useLogics from '../hooks/useLogics';
 import {DataProvider} from '../context/Context';
 
 import './CreateNote.scss';
+import useUploadNote from '../hooks/useUploadNote';
 
 function EditNote() {
   const {notes} = useContext(DataProvider);
@@ -21,14 +21,15 @@ function EditNote() {
   const navigate = useNavigate();
   let {id} = useParams();
   const editnote = notes.find((note) => note.id === id);
-  const {editNote} = useLogics();
+  const {editFirbaseDoc} = useUploadNote();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useGSAP(() => {
     gsap.fromTo(editNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
   }, {});
 
   useEffect(() => {
-    setTitle(editnote.heading);
+    setTitle(editnote.title);
     setText(editnote.note);
     setTimeout(() => {
       if (titleRef.current) {
@@ -45,13 +46,14 @@ function EditNote() {
     );
   }
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!title && !text) {
       return;
     }
-    editNote(id, title, text);
+    await editFirbaseDoc(id, title, text);
     navigate('/');
+    setIsButtonDisabled(false);
   };
   return (
     <div className='create-note' ref={editNoteRef}>
@@ -76,7 +78,9 @@ function EditNote() {
             setText(e.target.value);
           }}></textarea>
         <div className='buttons'>
-          <button onSubmit={submit}>Create note</button>
+          <button onSubmit={submit} disabled={isButtonDisabled}>
+            Save Changes
+          </button>
           <Link to='/'>
             <button className='back-button'>Back</button>
           </Link>
