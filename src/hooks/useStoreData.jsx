@@ -3,7 +3,7 @@ import {doc, setDoc, updateDoc, deleteDoc, collection, Timestamp} from 'firebase
 import {DataProvider} from '../context/Context';
 import {useContext} from 'react';
 
-function useUploadNote() {
+function useStoreData() {
   const {userId, setDataChange, isLogIn} = useContext(DataProvider);
 
   const setNewFireStoreDoc = async (title, note) => {
@@ -69,4 +69,4 @@ function useUploadNote() {
   return {setNewFireStoreDoc, deleteFireStoreDoc, editFirbaseDoc};
 }
 
-export default useUploadNote;
+export default useStoreData;

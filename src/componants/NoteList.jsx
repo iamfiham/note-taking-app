@@ -40,6 +40,7 @@ function NoteList() {
         </>
       ),
       needButton: true,
+      buttonText: 'Create note',
     },
     noResult: {
       titleTip: 'No notes found',
@@ -49,6 +50,7 @@ function NoteList() {
         </>
       ),
       needButton: false,
+      buttonText: 'Clear search',
     },
   };
 

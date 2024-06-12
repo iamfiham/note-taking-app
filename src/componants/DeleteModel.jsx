@@ -1,9 +1,9 @@
 import {RiDeleteBinLine} from 'react-icons/ri';
-import useUploadNote from '../hooks/useUploadNote';
+import useStoreData from '../hooks/useStoreData';
 import {useState} from 'react';
 
 const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
-  const {deleteFireStoreDoc} = useUploadNote();
+  const {deleteFireStoreDoc} = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const deleteNote = async () => {

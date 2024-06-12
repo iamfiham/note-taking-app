@@ -3,7 +3,7 @@ import {auth} from '../config/FireBaseConfig';
 import {GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword} from 'firebase/auth';
 import {useState} from 'react';
 
-function useSignInLogic() {
+function useSignIn() {
   const [isLoginErrorOpen, setIsLoginErrorOpen] = useState(false);
 
   const provider = new GoogleAuthProvider();
@@ -22,6 +22,7 @@ function useSignInLogic() {
         console.log(error);
       });
   };
+
   const signInWithEmail = (email, password, setEmail, setPassword, setIsButtonDisabled, setIsLoadBarOpen) => {
     setIsButtonDisabled(true);
     setIsLoadBarOpen(true);
@@ -63,4 +64,4 @@ function useSignInLogic() {
   };
 }
 
-export default useSignInLogic;
+export default useSignIn;

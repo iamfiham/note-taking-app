@@ -18,7 +18,7 @@ function Home() {
           <FiArrowRight className='stroke-neutral-500' />
         </button>
       </Link>
-      <p className='text-xs text-neutral-500 text-center mt-3'>Sign up to access your notes anywhere, anytime.</p>
+      {/* <p className='text-xs text-neutral-500 text-center mt-3'>Sign up to access your notes anywhere, anytime.</p> */}
     </div>
   );
 }

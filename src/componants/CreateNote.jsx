@@ -4,7 +4,7 @@ import {useGSAP} from '@gsap/react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
-import useUploadNote from '../hooks/useUploadNote';
+import useStoreData from '../hooks/useStoreData';
 
 import './CreateNote.scss';
 
@@ -14,7 +14,7 @@ function CreateNote() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const navigate = useNavigate();
-  const {setNewFireStoreDoc} = useUploadNote();
+  const {setNewFireStoreDoc} = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useGSAP(() => {

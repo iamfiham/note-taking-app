@@ -4,11 +4,11 @@ import {MdLockOutline} from 'react-icons/md';
 import {MdOutlineMailOutline} from 'react-icons/md';
 import './SignInForm.scss';
 import {MdErrorOutline} from 'react-icons/md';
-import useSignInLogic from '../../hooks/useSignInLogic';
+import useSignIn from '../../hooks/useSignIn';
 import {useState} from 'react';
 
 export default function SignInForm() {
-  const {isLoginErrorOpen, setIsLoginErrorOpen, signInWithGoogle, signInWithEmail} = useSignInLogic();
+  const {isLoginErrorOpen, setIsLoginErrorOpen, signInWithGoogle, signInWithEmail} = useSignIn();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordToolTipOpen, setIsPasswordToolTipOpen] = useState(false);
@@ -19,6 +19,7 @@ export default function SignInForm() {
   const googleSignIn = () => {
     signInWithGoogle(setIsLoadBarOpen);
   };
+
   const emailSignIn = () => {
     if (email.trim() == '' && password.trim() == '') {
       setIsEmailToolTipOpen(true);

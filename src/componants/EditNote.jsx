@@ -10,7 +10,7 @@ import {useGSAP} from '@gsap/react';
 import {DataProvider} from '../context/Context';
 
 import './CreateNote.scss';
-import useUploadNote from '../hooks/useUploadNote';
+import useStoreData from '../hooks/useStoreData';
 
 function EditNote() {
   const {notes} = useContext(DataProvider);
@@ -21,7 +21,7 @@ function EditNote() {
   const navigate = useNavigate();
   let {id} = useParams();
   const editnote = notes.find((note) => note.id === id);
-  const {editFirbaseDoc} = useUploadNote();
+  const {editFirbaseDoc} = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useGSAP(() => {

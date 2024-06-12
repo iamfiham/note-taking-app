@@ -8,14 +8,14 @@ import ProfilePopup from './ProfilePopup';
 
 import {DataProvider} from '../context/Context';
 import {auth} from '../config/FireBaseConfig';
-import useSignInLogic from '../hooks/useSignInLogic';
+import useSignIn from '../hooks/useSignIn';
 
 function NavBar() {
   const location = useLocation();
   const [hasBoxShadow, setHasBoxShadow] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const {isLogIn} = useContext(DataProvider);
-  const {logOut} = useSignInLogic();
+  const {logOut} = useSignIn();
 
   const user = auth.currentUser;
 
