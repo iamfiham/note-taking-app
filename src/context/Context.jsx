@@ -34,23 +34,29 @@ function Context({children}) {
     const getFireStoreDocs = async () => {
       try {
         setIsFetchLoading(true);
-        const notesCollection = query(collection(db, 'Notes'), where('userId', '==', userId), orderBy('createdAt', 'desc'));
-        const querySnapshot = await getDocs(notesCollection);
+        if (isLogIn && userId) {
+          const notesCollection = query(collection(db, 'Notes'), where('userId', '==', userId), orderBy('createdAt', 'desc'));
+          const querySnapshot = await getDocs(notesCollection);
+          const notesArray = [];
 
-        const notesArray = [];
-        querySnapshot.forEach((doc) => {
-          const createdAt = doc.data().createdAt.toDate().toLocaleString();
-          notesArray.push({id: doc.id, ...doc.data(), createdAt});
-        });
-        setNotes(() => [...notesArray]);
+          querySnapshot.forEach((doc) => {
+            const createdAt = doc.data().createdAt.toDate().toLocaleString();
+            notesArray.push({id: doc.id, ...doc.data(), createdAt});
+          });
+          setNotes(() => [...notesArray]);
+        } else {
+          setNotes(() => []);
+        }
         setIsFetchLoading(false);
       } catch (err) {
         console.log(err);
         setIsFetchLoading(false);
       }
     };
-    getFireStoreDocs();
-  }, [userId, dataChange]);
+    if (typeof isLogIn === 'boolean' && userId !== null) {
+      getFireStoreDocs();
+    }
+  }, [isLogIn, userId, dataChange]);
 
   const value = {notes, setNotes, searchTerm, setSearchTerm, setDataChange, isFetchLoading, isLogIn, userId, authLoading};
 
