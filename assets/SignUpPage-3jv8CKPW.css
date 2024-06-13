@@ -1,0 +1,1 @@
+.sign-in-page{display:grid;place-items:center;position:relative}.sign-in-page .sign-in-image{padding:.75rem;padding-right:0}@media all and (max-width: 800px){.sign-in-page .sign-in-image{display:none}}.sign-in-page .sign-in-image div{background-color:#065ad8;height:100%;border-radius:12px}.sign-in-page .main-content{display:grid;place-items:center}
