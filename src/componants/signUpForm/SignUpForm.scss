@@ -42,8 +42,8 @@ $blue: rgb(6, 90, 216);
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    margin-bottom: 0.25rem;
     text-align: center;
+    line-height: 1;
   }
   .sub-head {
     font-size: 0.85rem;
@@ -143,17 +143,19 @@ $blue: rgb(6, 90, 216);
       background-color: rgba(56, 56, 56);
     }
     &:disabled {
-      cursor: not-allowed;
       opacity: 0.6;
+      cursor: not-allowed;
     }
   }
   .error-msg {
     position: absolute;
     font-size: 0.8rem;
+    line-height: 1.15;
+    text-align: center;
     color: red;
-    bottom: 0rem;
+    bottom: 1rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 100%);
     visibility: hidden;
   }
   .error-msg.show {

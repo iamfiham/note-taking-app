@@ -1,18 +1,18 @@
 import {useContext} from 'react';
-import SignInForm from '../componants/signInForm/SignInForm';
 import {DataProvider} from '../context/Context';
 import useSignIn from '../hooks/useSignIn';
 import {IoIosArrowBack} from 'react-icons/io';
-import './SignInPage.scss';
+import './SignUpPage.scss';
 import {Link} from 'react-router-dom';
 
-function SignInPage() {
+function SignUpPage({children}) {
   const {isLogIn} = useContext(DataProvider);
   const {logOut} = useSignIn();
+  const backButtonRoute = isLogIn ? '/' : '/home';
 
   return (
     <div className='sign-in-page relative'>
-      <Link to='/'>
+      <Link to={backButtonRoute}>
         <button className='absolute -top-12 left-0 font-medium text-base/none p-1 pl-1 pr-2 rounded-full  hover:bg-neutral-50 flex items-center gap-1'>
           <IoIosArrowBack />
           back
@@ -27,10 +27,10 @@ function SignInPage() {
           </button>
         </div>
       ) : (
-        <SignInForm />
+        children
       )}
     </div>
   );
 }
 
-export default SignInPage;
+export default SignUpPage;

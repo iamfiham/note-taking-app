@@ -6,9 +6,12 @@ import './SignInForm.scss';
 import {MdErrorOutline} from 'react-icons/md';
 import useSignIn from '../../hooks/useSignIn';
 import {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function SignInForm() {
-  const {isLoginErrorOpen, setIsLoginErrorOpen, signInWithGoogle, signInWithEmail} = useSignIn();
+  const {signInWithGoogle, signInWithEmail} = useSignIn();
+  const [isLoginErrorOpen, setIsLoginErrorOpen] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordToolTipOpen, setIsPasswordToolTipOpen] = useState(false);
@@ -16,29 +19,45 @@ export default function SignInForm() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isLoadBarOpen, setIsLoadBarOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const googleSignIn = () => {
     signInWithGoogle(setIsLoadBarOpen);
   };
 
-  const emailSignIn = () => {
-    if (email.trim() == '' && password.trim() == '') {
-      setIsEmailToolTipOpen(true);
-      setIsPasswordToolTipOpen(true);
-      console.log('email and password fields empty');
-      return;
-    }
+  const emailSignIn = async () => {
+    let isInputCorrect = true;
+
     if (email.trim() == '') {
       setIsEmailToolTipOpen(true);
       console.log('empty email field');
-      return;
+      isInputCorrect = false;
     }
     if (password.trim() == '') {
       setIsPasswordToolTipOpen(true);
       console.log('empty password field');
-      return;
+      isInputCorrect = false;
     }
-    signInWithEmail(email, password, setEmail, setPassword, setIsButtonDisabled, setIsLoadBarOpen);
+    if (isInputCorrect) {
+      setIsButtonDisabled(true);
+      setIsLoadBarOpen(true);
+
+      let {result, errorCode} = await signInWithEmail(email.trim(), password.trim());
+
+      setIsLoadBarOpen(false);
+      setIsButtonDisabled(false);
+
+      if (result) {
+        setEmail('');
+        setPassword('');
+        navigate('/');
+      } else {
+        setIsLoginErrorOpen(true);
+        console.log(errorCode);
+      }
+    }
   };
+
   const passswordOnChange = (e) => {
     setIsPasswordToolTipOpen(false);
     setIsLoginErrorOpen(false);
@@ -96,7 +115,10 @@ export default function SignInForm() {
         Log in
       </button>
       <p className='createAnAccount-text'>
-        Don't have an account? <span> Create an account</span>
+        Don't have an account?
+        <Link to='/sign-up'>
+          <span> Create an account</span>
+        </Link>
       </p>
       <p className={`error-msg ${isLoginErrorOpen && 'show'}`}>Invalid Email or Password</p>
     </div>

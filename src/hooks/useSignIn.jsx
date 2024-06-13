@@ -1,11 +1,8 @@
 import {useNavigate} from 'react-router-dom';
 import {auth} from '../config/FireBaseConfig';
-import {GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword} from 'firebase/auth';
-import {useState} from 'react';
+import {GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
 
 function useSignIn() {
-  const [isLoginErrorOpen, setIsLoginErrorOpen] = useState(false);
-
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -13,7 +10,6 @@ function useSignIn() {
     setIsLoadBarOpen(true);
     signInWithPopup(auth, provider)
       .then(() => {
-        console.log('signed in with google');
         navigate('/');
         setIsLoadBarOpen(false);
       })
@@ -23,32 +19,41 @@ function useSignIn() {
       });
   };
 
-  const signInWithEmail = (email, password, setEmail, setPassword, setIsButtonDisabled, setIsLoadBarOpen) => {
-    setIsButtonDisabled(true);
-    setIsLoadBarOpen(true);
-    signInWithEmailAndPassword(auth, email.trim(), password.trim())
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('🚀 ~ signInWithEmail ~ user:', user);
-        setEmail('');
-        setPassword('');
-        navigate('/');
-        setIsLoadBarOpen(false);
-        setIsButtonDisabled(false);
+  const signInWithEmail = async (email, password) => {
+    let result;
+    let errorCode = null;
+    await signInWithEmailAndPassword(auth, email.trim(), password.trim())
+      .then(() => {
+        result = true;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        console.log('🚀 ~ signInWithEmail ~ errorMessage:', errorCode);
-        setIsLoginErrorOpen(true);
-        setIsLoadBarOpen(false);
-        setIsButtonDisabled(false);
+        result = false;
+        errorCode = error.code;
       });
+
+    return {result, errorCode};
+  };
+
+  const signUpWithEmail = async (email, password) => {
+    let result;
+    let errorCode = null;
+
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        result = true;
+      })
+      .catch((error) => {
+        result = false;
+        errorCode = error.code;
+      });
+    return {result, errorCode};
   };
 
   const logOut = () => {
     signOut(auth)
       .then(() => {
         console.log('sign out succesfull');
+        navigate('/home');
       })
       .catch(() => {
         console.log('sign out error');
@@ -56,10 +61,9 @@ function useSignIn() {
   };
 
   return {
-    isLoginErrorOpen,
-    setIsLoginErrorOpen,
     signInWithGoogle,
     signInWithEmail,
+    signUpWithEmail,
     logOut,
   };
 }

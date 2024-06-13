@@ -91,9 +91,11 @@ function NavBar() {
                   Log In
                 </button>
               </Link>
-              <button className='bg-neutral-800 font-medium border border-neutral-800 text-neutral-100 rounded-full px-[1.2em] py-[0.5em] border-solid text-sm  hover:bg-neutral-700  hover:border-neutral-700 transition-all'>
-                Sign Up
-              </button>
+              <Link to='/sign-up'>
+                <button className='bg-neutral-800 font-medium border border-neutral-800 text-neutral-100 rounded-full px-[1.2em] py-[0.5em] border-solid text-sm  hover:bg-neutral-700  hover:border-neutral-700 transition-all'>
+                  Sign Up
+                </button>
+              </Link>
             </div>
           )}
         </div>
