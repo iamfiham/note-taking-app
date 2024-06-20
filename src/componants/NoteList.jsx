@@ -7,7 +7,7 @@ import DeleteModel from './DeleteModel';
 import {createPortal} from 'react-dom';
 import ZoomUi from './ZoomUi';
 import PlaceHolderCollection from './placeHolders/PlaceHolderCollection';
-import {motion} from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
 
 const portalDom = document.getElementById('portal');
 
@@ -82,7 +82,13 @@ function NoteList() {
 
   return (
     <div className='note-list-wrapper'>
-      {isDeleteModelOpen && createPortal(<DeleteModel idOfDeleteNote={idOfDeleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />, portalDom)}
+      {createPortal(
+        <AnimatePresence>
+          {isDeleteModelOpen && <DeleteModel key={idOfDeleteNote} idOfDeleteNote={idOfDeleteNote} setIsDeleteModelOpen={setIsDeleteModelOpen} />}
+        </AnimatePresence>,
+        portalDom
+      )}
+
       {!isFetchLoading && renderNotes.length !== 0 && (
         <motion.div initial='hidden' animate='visible' exit='hidden' variants={animation} className='note-list '>
           {renderNotes.map((note) => (

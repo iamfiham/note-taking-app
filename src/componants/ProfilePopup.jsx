@@ -8,10 +8,10 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
   };
 
   const animation = {
-    visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
-    hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
+    visible: {opacity: 1, y: 0, scale: 1, willChange: 'opacity, transform'},
+    hidden: {opacity: 0, y: -6, scale: 0.98, willChange: 'opacity, transform'},
   };
-  const transitionSettings = {ease: 'easeInOut', duration: 0.2};
+  const transitionSettings = {ease: 'easeOut', duration: 0.2};
 
   return (
     <motion.div
@@ -20,7 +20,7 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
       exit='hidden'
       transition={transitionSettings}
       variants={animation}
-      className={` ${componentStyle} w-64 bg-white rounded-lg p-2  shadow-n2 border border-solid border-neutral-100`}>
+      className={` ${componentStyle} w-64 bg-white rounded-lg p-2  shadow-n2 border border-solid border-neutral-100 origin-top`}>
       <div className='flex gap-3 items-center border-0 border-b border-gray-200 border-solid pb-3 mb-2'>
         <div className='relative'>
           <img src={photoURL} alt='Profile' className='w-9 h-9 rounded-full object-cover' />
