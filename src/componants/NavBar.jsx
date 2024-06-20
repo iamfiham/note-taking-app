@@ -10,6 +10,8 @@ import {DataProvider} from '../context/Context';
 import {auth} from '../config/FireBaseConfig';
 import useSignIn from '../hooks/useSignIn';
 
+import {AnimatePresence} from 'framer-motion';
+
 function NavBar() {
   const location = useLocation();
   const [hasBoxShadow, setHasBoxShadow] = useState(false);
@@ -41,16 +43,18 @@ function NavBar() {
     <>
       <div className={`nav-bar-wrapper ${hasBoxShadow && 'has-shadow'}`}>
         <div className='nav-bar'>
-          {isLogIn && isProfileOpen && (
-            <ProfilePopup
-              componentStyle='absolute right-0 top-16'
-              displayName={displayName ? displayName : 'Unknown User'}
-              email={email}
-              logOut={logOut}
-              setIsProfileOpen={setIsProfileOpen}
-              photoURL={photoURL ? photoURL : profilePic}
-            />
-          )}
+          <AnimatePresence>
+            {isLogIn && isProfileOpen && (
+              <ProfilePopup
+                componentStyle='absolute right-0 top-16'
+                displayName={displayName ? displayName : 'Unknown User'}
+                email={email}
+                logOut={logOut}
+                setIsProfileOpen={setIsProfileOpen}
+                photoURL={photoURL ? photoURL : profilePic}
+              />
+            )}
+          </AnimatePresence>
 
           <Link to='/'>
             <h2 className='logo'>

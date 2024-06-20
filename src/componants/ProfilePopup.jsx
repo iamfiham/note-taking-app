@@ -1,4 +1,5 @@
 import {AiOutlineLogout, AiOutlineUser} from 'react-icons/ai';
+import {motion} from 'framer-motion';
 
 function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileOpen, photoURL}) {
   const logOutAccount = async () => {
@@ -6,8 +7,20 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
     setIsProfileOpen(false);
   };
 
+  const animation = {
+    visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
+    hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
+  };
+  const transitionSettings = {ease: 'easeInOut', duration: 0.2};
+
   return (
-    <div className={` ${componentStyle} w-64 bg-white rounded-lg p-2  shadow-n2 border border-solid border-neutral-100`}>
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      exit='hidden'
+      transition={transitionSettings}
+      variants={animation}
+      className={` ${componentStyle} w-64 bg-white rounded-lg p-2  shadow-n2 border border-solid border-neutral-100`}>
       <div className='flex gap-3 items-center border-0 border-b border-gray-200 border-solid pb-3 mb-2'>
         <div className='relative'>
           <img src={photoURL} alt='Profile' className='w-9 h-9 rounded-full object-cover' />
@@ -31,7 +44,7 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
         <AiOutlineLogout className='fill-neutral-500' />
         Log out
       </button>
-    </div>
+    </motion.div>
   );
 }
 

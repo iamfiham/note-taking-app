@@ -1,10 +1,8 @@
-import gsap from 'gsap';
-import {useGSAP} from '@gsap/react';
-
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
 import useStoreData from '../hooks/useStoreData';
+import {motion} from 'framer-motion';
 
 import './CreateNote.scss';
 
@@ -16,10 +14,6 @@ function CreateNote() {
   const navigate = useNavigate();
   const {setNewFireStoreDoc} = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  useGSAP(() => {
-    gsap.fromTo(createNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
-  }, {});
 
   useEffect(() => {
     setTimeout(() => {
@@ -42,8 +36,21 @@ function CreateNote() {
     result && navigate('/');
   };
 
+  const animation = {
+    visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
+    hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
+  };
+  const transitionSettings = {ease: 'easeInOut', duration: 0.3};
+
   return (
-    <div className='create-note' ref={createNoteRef}>
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      exit='hidden'
+      transition={transitionSettings}
+      variants={animation}
+      className='create-note'
+      ref={createNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'
@@ -73,7 +80,7 @@ function CreateNote() {
           </Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
 

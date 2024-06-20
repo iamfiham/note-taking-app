@@ -2,15 +2,13 @@ import {useRef} from 'react';
 import {useContext} from 'react';
 import {useEffect, useState} from 'react';
 
-import gsap from 'gsap';
 import {useNavigate, useParams, Link} from 'react-router-dom';
-
-import {useGSAP} from '@gsap/react';
 
 import {DataProvider} from '../context/Context';
 
 import './CreateNote.scss';
 import useStoreData from '../hooks/useStoreData';
+import {motion} from 'framer-motion';
 
 function EditNote() {
   const {notes} = useContext(DataProvider);
@@ -23,10 +21,6 @@ function EditNote() {
   const editnote = notes.find((note) => note.id === id);
   const {editFirbaseDoc} = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  useGSAP(() => {
-    gsap.fromTo(editNoteRef.current, {y: 5, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.inOut'});
-  }, {});
 
   useEffect(() => {
     setTitle(editnote.title);
@@ -55,8 +49,21 @@ function EditNote() {
     navigate('/');
     setIsButtonDisabled(false);
   };
+  const animation = {
+    visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
+    hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
+  };
+  const transitionSettings = {ease: 'easeInOut', duration: 0.3};
+
   return (
-    <div className='create-note' ref={editNoteRef}>
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      exit='hidden'
+      transition={transitionSettings}
+      variants={animation}
+      className='create-note'
+      ref={editNoteRef}>
       <form onSubmit={submit}>
         <input
           type='text'
@@ -86,7 +93,7 @@ function EditNote() {
           </Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
 
