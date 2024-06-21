@@ -20,7 +20,7 @@ const DeleteModel = ({idOfDeleteNote, setIsDeleteModelOpen}) => {
   };
   const cardAnimation = {
     visible: {opacity: 1, scale: 1, willChange: 'opacity, transform'},
-    hidden: {opacity: 0, scale: 0.95, willChange: 'opacity, transform'},
+    hidden: {opacity: 0, scale: 0.98, willChange: 'opacity, transform'},
   };
   const bgTransitionSettings = {ease: 'easeOut', duration: 0.2};
   const cardTransitionSettings = {ease: 'easeOut', duration: 0.25};

@@ -16,6 +16,7 @@ function NoteList() {
   const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
   const [idOfDeleteNote, setIdOfDeleteNote] = useState('');
   const [renderNotes, setRenderNotes] = useState(notes);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const debounceTimeout = useRef(null);
 
   const fuseOptions = {
@@ -45,6 +46,25 @@ function NoteList() {
       clearTimeout(debounceTimeout.current);
     };
   }, [searchTerm, isFetchLoading]);
+
+  useEffect(() => {
+    function checkTouchDevice() {
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+        setIsTouchDevice(true);
+        return;
+      }
+      if (window.DocumentTouch && document instanceof DocumentTouch) {
+        setIsTouchDevice(true);
+        return;
+      }
+      if ('ontouchstart' in document.documentElement) {
+        setIsTouchDevice(true);
+        return;
+      }
+      setIsTouchDevice(false);
+    }
+    checkTouchDevice();
+  }, []);
 
   const instructions = {
     noNotes: {
@@ -90,13 +110,13 @@ function NoteList() {
       )}
 
       {!isFetchLoading && renderNotes.length !== 0 && (
-        <motion.div initial='hidden' animate='visible' exit='hidden' variants={animation} className='note-list '>
+        <motion.div initial='hidden' animate='visible' variants={animation} className='note-list '>
           {renderNotes.map((note) => (
             <motion.div
               key={note.id}
               variants={noteCardVariants}
-              transition={{ease: 'easeInOut', duration: 0.25}}
-              drag
+              transition={{ease: 'easeInOut', duration: 0.2}}
+              drag={!isTouchDevice}
               dragSnapToOrigin='true'
               dragTransition={{bounceStiffness: 500, bounceDamping: 25}}
               dragConstraints={{left: 0, right: 0, top: 0, bottom: 0}}

@@ -52,6 +52,7 @@ function EditNote() {
   const animation = {
     visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
     hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
+    exit: {opacity: 0, y: -5, willChange: 'opacity, transform', transition: {duration: 0.1}},
   };
   const transitionSettings = {ease: 'easeInOut', duration: 0.3};
 
@@ -59,7 +60,7 @@ function EditNote() {
     <motion.div
       initial='hidden'
       animate='visible'
-      exit='hidden'
+      exit='exit'
       transition={transitionSettings}
       variants={animation}
       className='create-note'

@@ -22,7 +22,7 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
       exit='hidden'
       transition={transitionSettings}
       variants={animation}
-      className={` ${componentStyle} w-64 bg-white rounded-lg p-2 shadow-n2 border border-solid border-neutral-100 origin-top`}>
+      className={`${componentStyle} w-64 bg-white rounded-lg p-2 shadow-n2 border border-solid border-neutral-100 origin-top`}>
       <div className='flex gap-4 items-center border-0 border-b border-gray-200 border-solid p-2 mb-2'>
         <div className='relative'>
           <img src={photoURL} alt='Profile' className='w-9 h-9 rounded-full object-cover' />
@@ -37,13 +37,17 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
         </div>
       </div>
       <Link to='/'>
-        <button className='flex gap-3 items-center font-normal p-2  rounded-md  text-neutral-500  text-sm/none hover:bg-sky-50 w-full transition-all'>
+        <button
+          className='flex gap-3 items-center font-normal p-2  rounded-md  text-neutral-500  text-sm/none hover:bg-sky-50/50 w-full transition-all'
+          onClick={() => {
+            setIsProfileOpen(false);
+          }}>
           <LuFolder className=' stroke-neutral-500 ' />
           All Notes
         </button>
       </Link>
       <button
-        className='flex gap-3 items-center font-normal  p-2  rounded-md  text-neutral-500 text-sm/none  hover:bg-sky-50 w-full transition-all '
+        className='flex gap-3 items-center font-normal  p-2  rounded-md  text-neutral-500 text-sm/none  hover:bg-sky-50/50 w-full transition-all '
         onClick={logOutAccount}>
         <LuLogOut className='stroke-neutral-500' />
         Log out

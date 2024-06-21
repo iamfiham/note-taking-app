@@ -22,7 +22,7 @@ function Home() {
         initial='hidden'
         animate='visible'
         variants={animation}
-        className='flex flex-wrap justify-center gap-2 sm:gap-4 sm:row-gap row-gap  sm:text-6xl sm:leading-[0.55]  tracking-tight font-semibold text-neutral-800 mb-6 text-5xl leading-[0.55] max-w-[700px]'>
+        className='flex flex-wrap justify-center gap-2 sm:gap-3 sm:row-gap row-gap  sm:text-6xl sm:leading-[0.55]  -tracking-[0.035em] font-semibold text-neutral-800 mb-6 text-5xl leading-[0.55] max-w-[700px]'>
         {heading.map((word, index) => (
           <span className='overflow-hidden  sm:pb-3  pb-2'>
             <motion.span key={index} variants={noteCardVariants} transition={{ease: 'easeOut', duration: 0.3}} className=' inline-block py-2 '>

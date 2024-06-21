@@ -100,11 +100,12 @@ export default function SignUpForm() {
   const animation = {
     visible: {opacity: 1, willChange: 'opacity'},
     hidden: {opacity: 0, willChange: 'opacity'},
+    exit: {opacity: 0, willChange: 'opacity', transition: {duration: 0.1}},
   };
   const transitionSettings = {ease: 'easeInOut', duration: 0.3};
 
   return (
-    <motion.div initial='hidden' animate='visible' exit='hidden' transition={transitionSettings} variants={animation} className='sign-in-form'>
+    <motion.div initial='hidden' animate='visible' exit='exit' transition={transitionSettings} variants={animation} className='sign-in-form'>
       {isLoadBarOpen && <div className='load-bar'></div>}
       <h2>Create Your Account</h2>
       <p className='sub-head'>Create your account with email and password</p>
