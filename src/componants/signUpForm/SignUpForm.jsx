@@ -4,6 +4,7 @@ import './SignUpForm.scss';
 import useSignIn from '../../hooks/useSignIn';
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {motion} from 'framer-motion';
 
 export default function SignUpForm() {
   const [isSignUpErrorOpen, setIsSignUpErrorOpen] = useState(false);
@@ -96,8 +97,14 @@ export default function SignUpForm() {
     setIsSignUpErrorOpen(true);
   };
 
+  const animation = {
+    visible: {opacity: 1, willChange: 'opacity'},
+    hidden: {opacity: 0, willChange: 'opacity'},
+  };
+  const transitionSettings = {ease: 'easeInOut', duration: 0.3};
+
   return (
-    <div className='sign-in-form'>
+    <motion.div initial='hidden' animate='visible' exit='hidden' transition={transitionSettings} variants={animation} className='sign-in-form'>
       {isLoadBarOpen && <div className='load-bar'></div>}
       <h2>Create Your Account</h2>
       <p className='sub-head'>Create your account with email and password</p>
@@ -155,6 +162,6 @@ export default function SignUpForm() {
         </Link>
       </p>
       <p className={`error-msg ${isSignUpErrorOpen ? 'show' : ''}`}>{errorMassage}</p>
-    </div>
+    </motion.div>
   );
 }

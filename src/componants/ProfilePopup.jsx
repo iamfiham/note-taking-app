@@ -1,5 +1,7 @@
-import {AiOutlineLogout, AiOutlineUser} from 'react-icons/ai';
+import {LuFolder} from 'react-icons/lu';
+import {LuLogOut} from 'react-icons/lu';
 import {motion} from 'framer-motion';
+import {Link} from 'react-router-dom';
 
 function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileOpen, photoURL}) {
   const logOutAccount = async () => {
@@ -20,8 +22,8 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
       exit='hidden'
       transition={transitionSettings}
       variants={animation}
-      className={` ${componentStyle} w-64 bg-white rounded-lg p-2  shadow-n2 border border-solid border-neutral-100 origin-top`}>
-      <div className='flex gap-3 items-center border-0 border-b border-gray-200 border-solid pb-3 mb-2'>
+      className={` ${componentStyle} w-64 bg-white rounded-lg p-2 shadow-n2 border border-solid border-neutral-100 origin-top`}>
+      <div className='flex gap-4 items-center border-0 border-b border-gray-200 border-solid p-2 mb-2'>
         <div className='relative'>
           <img src={photoURL} alt='Profile' className='w-9 h-9 rounded-full object-cover' />
           <span className='absolute -bottom-[2px] -right-[2px] flex h-3 w-3'>
@@ -30,18 +32,20 @@ function ProfilePopup({componentStyle, displayName, email, logOut, setIsProfileO
           </span>
         </div>
         <div className='flex flex-col gap-[2px]'>
-          <h2 className='font-semibold text-gray-800 text-base leading-none truncate'>{displayName}</h2>
-          <h4 className='font-normal text-gray-400 text-sm leading-none truncate py-1 '>{email}</h4>
+          <h2 className='font-medium text-neutral-800 text-base/none truncate'>{displayName}</h2>
+          <h4 className='font-normal text-neutral-400 text-sm/none truncate  py-1 tracking-wide'>{email}</h4>
         </div>
       </div>
-      {/* <button className='flex gap-2 items-center p-2 rounded-md font-normal text-gray-600 text-sm leading-none hover:bg-sky-50 w-full transition-all'>
-        <AiOutlineUser className=' text-gray-600 scale-110' />
-        Profile
-      </button> */}
+      <Link to='/'>
+        <button className='flex gap-3 items-center font-normal p-2  rounded-md  text-neutral-500  text-sm/none hover:bg-sky-50 w-full transition-all'>
+          <LuFolder className=' stroke-neutral-500 ' />
+          All Notes
+        </button>
+      </Link>
       <button
-        className='flex gap-2 items-center  p-2 rounded-md font-normal text-neutral-500 text-sm leading-none hover:bg-sky-50 w-full transition-all '
+        className='flex gap-3 items-center font-normal  p-2  rounded-md  text-neutral-500 text-sm/none  hover:bg-sky-50 w-full transition-all '
         onClick={logOutAccount}>
-        <AiOutlineLogout className='fill-neutral-500' />
+        <LuLogOut className='stroke-neutral-500' />
         Log out
       </button>
     </motion.div>

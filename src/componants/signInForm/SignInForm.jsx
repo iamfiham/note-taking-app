@@ -7,6 +7,7 @@ import {MdErrorOutline} from 'react-icons/md';
 import useSignIn from '../../hooks/useSignIn';
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {motion} from 'framer-motion';
 
 export default function SignInForm() {
   const {signInWithGoogle, signInWithEmail} = useSignIn();
@@ -69,8 +70,14 @@ export default function SignInForm() {
     setIsLoginErrorOpen(false);
   };
 
+  const animation = {
+    visible: {opacity: 1, willChange: 'opacity'},
+    hidden: {opacity: 0, willChange: 'opacity'},
+  };
+  const transitionSettings = {ease: 'easeInOut', duration: 0.3};
+
   return (
-    <div className='sign-in-form'>
+    <motion.div initial='hidden' animate='visible' exit='hidden' transition={transitionSettings} variants={animation} className='sign-in-form'>
       {isLoadBarOpen && <div className='load-bar'></div>}
       <h2>Log in to your Account</h2>
       <p className='sub-head'>Wellcome back! Select method to log in</p>
@@ -121,6 +128,6 @@ export default function SignInForm() {
         </Link>
       </p>
       <p className={`error-msg ${isLoginErrorOpen && 'show'}`}>Invalid Email or Password</p>
-    </div>
+    </motion.div>
   );
 }

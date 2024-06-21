@@ -3,3 +3,7 @@
   margin-inline: auto;
   padding-block: 4rem;
 }
+.app {
+  overflow: hidden;
+  min-height: 100dvh;
+}

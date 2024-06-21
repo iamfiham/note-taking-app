@@ -5,7 +5,7 @@ import {LuFileEdit} from 'react-icons/lu';
 
 function NoteCard({id, heading, note, date, setIsDeleteModelOpen, setIdOfDeleteNote}) {
   return (
-    <div className='border border-solid  note-card bg-white  border-neutral-200'>
+    <div className='border border-solid  note-card bg-white  border-neutral-100 shadow-n1'>
       <h4 className='note-heading'>{heading}</h4>
       <p className='note-caption'>{note}</p>
       <div className='header'>

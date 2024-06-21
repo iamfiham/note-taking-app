@@ -92,7 +92,15 @@ function NoteList() {
       {!isFetchLoading && renderNotes.length !== 0 && (
         <motion.div initial='hidden' animate='visible' exit='hidden' variants={animation} className='note-list '>
           {renderNotes.map((note) => (
-            <motion.div key={note.id} variants={noteCardVariants} transition={{ease: 'easeInOut', duration: 0.25}}>
+            <motion.div
+              key={note.id}
+              variants={noteCardVariants}
+              transition={{ease: 'easeInOut', duration: 0.25}}
+              drag
+              dragSnapToOrigin='true'
+              dragTransition={{bounceStiffness: 500, bounceDamping: 25}}
+              dragConstraints={{left: 0, right: 0, top: 0, bottom: 0}}
+              dragElastic={0.4}>
               <NoteCard
                 key={note.id}
                 id={note.id}
