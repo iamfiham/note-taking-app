@@ -4,6 +4,7 @@
   padding-block: 4rem;
 }
 .app {
-  overflow: hidden;
+  overflow: clip;
   min-height: 100dvh;
+  position: relative;
 }

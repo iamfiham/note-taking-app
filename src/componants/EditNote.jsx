@@ -1,40 +1,52 @@
-import {useRef} from 'react';
-import {useContext} from 'react';
-import {useEffect, useState} from 'react';
+import { useRef } from "react";
+import { useContext } from "react";
+import { useEffect, useState } from "react";
 
-import {useNavigate, useParams, Link} from 'react-router-dom';
+import { useNavigate, useParams, Link } from "react-router-dom";
 
-import {DataProvider} from '../context/Context';
+import { DataProvider } from "../context/Context";
 
-import './CreateNote.scss';
-import useStoreData from '../hooks/useStoreData';
-import {motion} from 'framer-motion';
+import "./CreateNote.scss";
+import useStoreData from "../hooks/useStoreData";
+import { motion } from "framer-motion";
 
 function EditNote() {
-  const {notes} = useContext(DataProvider);
+  const { notes } = useContext(DataProvider);
   const editNoteRef = useRef(null);
   const titleRef = useRef(null);
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [editnote, setEditnote] = useState("");
   const navigate = useNavigate();
-  let {id} = useParams();
-  const editnote = notes.find((note) => note.id === id);
-  const {editFirbaseDoc} = useStoreData();
+  let { id } = useParams();
+  const { editFirbaseDoc } = useStoreData();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
-    setTitle(editnote.title);
-    setText(editnote.note);
+    const foundNote = notes.find((note) => note.id === id);
+    setEditnote(foundNote);
+    if (foundNote) {
+      setTitle(foundNote.title);
+      setText(foundNote.note);
+    }
     setTimeout(() => {
       if (titleRef.current) {
         titleRef.current.focus();
       }
     }, 0);
-  }, []);
+  }, [notes, id]);
 
   if (!editnote) {
     return (
-      <div className='error-div' style={{fontSize: '2rem', textAlign: 'center', fontWeight: '700', padding: '3rem 1rem'}}>
+      <div
+        className="error-div"
+        style={{
+          fontSize: "2rem",
+          textAlign: "center",
+          fontWeight: "700",
+          padding: "3rem 1rem",
+        }}
+      >
         Error: Item not found
       </div>
     );
@@ -42,33 +54,40 @@ function EditNote() {
 
   const submit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true);
     if (!title && !text) {
       return;
     }
     await editFirbaseDoc(id, title, text);
-    navigate('/');
+    navigate("/");
     setIsButtonDisabled(false);
   };
   const animation = {
-    visible: {opacity: 1, y: 0, willChange: 'opacity, transform'},
-    hidden: {opacity: 0, y: -5, willChange: 'opacity, transform'},
-    exit: {opacity: 0, y: -5, willChange: 'opacity, transform', transition: {duration: 0.1}},
+    visible: { opacity: 1, y: 0, willChange: "opacity, transform" },
+    hidden: { opacity: 0, y: -5, willChange: "opacity, transform" },
+    exit: {
+      opacity: 0,
+      y: -5,
+      willChange: "opacity, transform",
+      transition: { duration: 0.1 },
+    },
   };
-  const transitionSettings = {ease: 'easeInOut', duration: 0.3};
+  const transitionSettings = { ease: "easeInOut", duration: 0.3 };
 
   return (
     <motion.div
-      initial='hidden'
-      animate='visible'
-      exit='exit'
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       transition={transitionSettings}
       variants={animation}
-      className='create-note'
-      ref={editNoteRef}>
+      className="create-note"
+      ref={editNoteRef}
+    >
       <form onSubmit={submit}>
         <input
-          type='text'
-          placeholder='Title Here ...'
+          type="text"
+          placeholder="Title Here ..."
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
@@ -76,21 +95,22 @@ function EditNote() {
           ref={titleRef}
         />
         <textarea
-          name=''
-          id=''
-          cols='30'
-          rows='10'
-          placeholder='Text Here ...'
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="Text Here ..."
           value={text}
           onChange={(e) => {
             setText(e.target.value);
-          }}></textarea>
-        <div className='buttons'>
+          }}
+        ></textarea>
+        <div className="buttons">
           <button onSubmit={submit} disabled={isButtonDisabled}>
             Save Changes
           </button>
-          <Link to='/'>
-            <button className='back-button'>Back</button>
+          <Link to="/">
+            <button className="back-button">Back</button>
           </Link>
         </div>
       </form>

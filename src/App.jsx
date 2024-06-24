@@ -1,21 +1,28 @@
-import './App.css';
-import {Routes, Route, HashRouter, Navigate, useLocation} from 'react-router-dom';
-import NavBar from './componants/NavBar';
-import {lazy, Suspense, useContext} from 'react';
-import {DataProvider} from './context/Context';
-import Loader from './componants/Loader/Loader';
-const Home = lazy(() => import('./layouts/Home'));
-const NoteList = lazy(() => import('./componants/NoteList'));
-const EditNote = lazy(() => import('./componants/EditNote'));
-const SignUpPage = lazy(() => import('./layouts/SignUpPage'));
-const SignInForm = lazy(() => import('./componants/signInForm/SignInForm'));
-const SignUpForm = lazy(() => import('./componants/signUpForm/SignUpForm'));
-const CreateNote = lazy(() => import('./componants/CreateNote'));
+import "./App.css";
+import {
+  Routes,
+  Route,
+  HashRouter,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import NavBar from "./componants/NavBar";
+import { lazy, Suspense, useContext } from "react";
+import { DataProvider } from "./context/Context";
+import Loader from "./componants/Loader/Loader";
+const Home = lazy(() => import("./layouts/Home"));
+const NoteList = lazy(() => import("./componants/NoteList"));
+const EditNote = lazy(() => import("./componants/EditNote"));
+const SignUpPage = lazy(() => import("./layouts/SignUpPage"));
+const SignInForm = lazy(() => import("./componants/signInForm/SignInForm"));
+const SignUpForm = lazy(() => import("./componants/signUpForm/SignUpForm"));
+const CreateNote = lazy(() => import("./componants/CreateNote"));
 
-import {motion, AnimatePresence} from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
+import ViewNote from "./componants/ViewNote";
 
 function App() {
-  const {isLogIn, authLoading} = useContext(DataProvider);
+  const { isLogIn, authLoading } = useContext(DataProvider);
   const location = useLocation();
 
   if (authLoading) {
@@ -23,17 +30,23 @@ function App() {
   }
 
   return (
-    <div className='app'>
+    <div className="app">
       <Suspense fallback={<Loader />}>
         <NavBar />
-        <div className='wrapper'>
-          <AnimatePresence mode='wait'>
+        <div className="wrapper">
+          <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path='/' element={isLogIn ? <NoteList /> : <Navigate to='/home' />} />
-              <Route path='/home' element={<Home />} />
-              <Route path='/create' element={isLogIn ? <CreateNote /> : <Navigate to='/sign-in' />} />
               <Route
-                path='/sign-in'
+                path="/"
+                element={isLogIn ? <NoteList /> : <Navigate to="/home" />}
+              />
+              <Route path="/home" element={<Home />} />
+              <Route
+                path="/create"
+                element={isLogIn ? <CreateNote /> : <Navigate to="/sign-in" />}
+              />
+              <Route
+                path="/sign-in"
                 element={
                   <SignUpPage>
                     <SignInForm />
@@ -41,15 +54,29 @@ function App() {
                 }
               />
               <Route
-                path='/sign-up'
+                path="/sign-up"
                 element={
                   <SignUpPage>
                     <SignUpForm />
                   </SignUpPage>
                 }
               />
-              <Route path='/edit/:id' element={isLogIn ? <EditNote /> : <Navigate to='/sign-in' />} />
-              <Route path='*' element={<div className='text-3xl text-center font-bold py-12 px-4'>Error: Item not found</div>} />
+              <Route
+                path="/edit/:id"
+                element={isLogIn ? <EditNote /> : <Navigate to="/sign-in" />}
+              />
+              <Route
+                path="/view/:id"
+                element={isLogIn ? <ViewNote /> : <Navigate to="/sign-in" />}
+              />
+              <Route
+                path="*"
+                element={
+                  <div className="px-4 py-12 text-center text-3xl font-bold">
+                    Error: Item not found
+                  </div>
+                }
+              />
             </Routes>
           </AnimatePresence>
         </div>
