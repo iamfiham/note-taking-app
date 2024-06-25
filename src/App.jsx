@@ -1,11 +1,5 @@
 import "./App.css";
-import {
-  Routes,
-  Route,
-  HashRouter,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import NavBar from "./componants/NavBar";
 import { lazy, Suspense, useContext } from "react";
 import { DataProvider } from "./context/Context";
@@ -17,19 +11,18 @@ const SignUpPage = lazy(() => import("./layouts/SignUpPage"));
 const SignInForm = lazy(() => import("./componants/signInForm/SignInForm"));
 const SignUpForm = lazy(() => import("./componants/signUpForm/SignUpForm"));
 const CreateNote = lazy(() => import("./componants/CreateNote"));
+import ViewNotePlaceHolder from "./componants/placeHolders/ViewNotePlaceHolder";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ViewNote from "./componants/ViewNote";
 
 function App() {
-  const { isLogIn, authLoading } = useContext(DataProvider);
+  const { isLogIn, authLoading, isFetchLoading } = useContext(DataProvider);
   const location = useLocation();
 
-  if (authLoading) {
-    return <Loader />;
-  }
-
-  return (
+  return authLoading ? (
+    <Loader />
+  ) : (
     <div className="app">
       <Suspense fallback={<Loader />}>
         <NavBar />
@@ -63,11 +56,31 @@ function App() {
               />
               <Route
                 path="/edit/:id"
-                element={isLogIn ? <EditNote /> : <Navigate to="/sign-in" />}
+                element={
+                  isLogIn ? (
+                    isFetchLoading ? (
+                      <Loader />
+                    ) : (
+                      <EditNote />
+                    )
+                  ) : (
+                    <Navigate to="/sign-in" />
+                  )
+                }
               />
               <Route
                 path="/view/:id"
-                element={isLogIn ? <ViewNote /> : <Navigate to="/sign-in" />}
+                element={
+                  isLogIn ? (
+                    isFetchLoading ? (
+                      <ViewNotePlaceHolder />
+                    ) : (
+                      <ViewNote />
+                    )
+                  ) : (
+                    <Navigate to="/sign-in" />
+                  )
+                }
               />
               <Route
                 path="*"

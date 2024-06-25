@@ -45,7 +45,16 @@ function Context({ children }) {
 
           querySnapshot.forEach((doc) => {
             const createdAt = doc.data().createdAt.toDate().toLocaleString();
-            notesArray.push({ id: doc.id, ...doc.data(), createdAt });
+            const lastModified = doc
+              .data()
+              .lastModified.toDate()
+              .toLocaleString();
+            notesArray.push({
+              id: doc.id,
+              ...doc.data(),
+              createdAt,
+              lastModified,
+            });
           });
           setNotes(() => [...notesArray]);
         } else {

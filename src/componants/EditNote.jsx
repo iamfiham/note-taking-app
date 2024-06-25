@@ -7,6 +7,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { DataProvider } from "../context/Context";
 
 import "./CreateNote.scss";
+import Loader from "../componants/Loader/Loader";
 import useStoreData from "../hooks/useStoreData";
 import { motion } from "framer-motion";
 
@@ -34,23 +35,8 @@ function EditNote() {
         titleRef.current.focus();
       }
     }, 0);
+    console.log("rendering");
   }, [notes, id]);
-
-  if (!editnote) {
-    return (
-      <div
-        className="error-div"
-        style={{
-          fontSize: "2rem",
-          textAlign: "center",
-          fontWeight: "700",
-          padding: "3rem 1rem",
-        }}
-      >
-        Error: Item not found
-      </div>
-    );
-  }
 
   const submit = async (e) => {
     e.preventDefault();
@@ -59,8 +45,8 @@ function EditNote() {
       return;
     }
     await editFirbaseDoc(id, title, text);
-    navigate("/");
     setIsButtonDisabled(false);
+    navigate("/");
   };
   const animation = {
     visible: { opacity: 1, y: 0, willChange: "opacity, transform" },
@@ -74,7 +60,7 @@ function EditNote() {
   };
   const transitionSettings = { ease: "easeInOut", duration: 0.3 };
 
-  return (
+  return editnote ? (
     <motion.div
       initial="hidden"
       animate="visible"
@@ -110,11 +96,25 @@ function EditNote() {
             Save Changes
           </button>
           <Link to="/">
-            <button className="back-button">Back</button>
+            <button className="back-button" type="button">
+              Back
+            </button>
           </Link>
         </div>
       </form>
     </motion.div>
+  ) : (
+    <div
+      className="error-div"
+      style={{
+        fontSize: "2rem",
+        textAlign: "center",
+        fontWeight: "700",
+        padding: "3rem 1rem",
+      }}
+    >
+      Error: Item not found
+    </div>
   );
 }
 

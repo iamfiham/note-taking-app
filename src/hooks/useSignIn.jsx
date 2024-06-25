@@ -1,6 +1,13 @@
-import {useNavigate} from 'react-router-dom';
-import {auth} from '../config/FireBaseConfig';
-import {GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/FireBaseConfig";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  signInWithEmailAndPassword,
+  updateProfile,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 function useSignIn() {
   const provider = new GoogleAuthProvider();
@@ -10,7 +17,7 @@ function useSignIn() {
     setIsLoadBarOpen(true);
     signInWithPopup(auth, provider)
       .then(() => {
-        navigate('/');
+        navigate("/");
         setIsLoadBarOpen(false);
       })
       .catch((error) => {
@@ -31,7 +38,7 @@ function useSignIn() {
         errorCode = error.code;
       });
 
-    return {result, errorCode};
+    return { result, errorCode };
   };
 
   const signUpWithEmail = async (email, password) => {
@@ -46,17 +53,17 @@ function useSignIn() {
         result = false;
         errorCode = error.code;
       });
-    return {result, errorCode};
+    return { result, errorCode };
   };
 
   const logOut = () => {
     signOut(auth)
       .then(() => {
-        console.log('sign out succesfull');
-        navigate('/home');
+        console.log("sign out succesfull");
+        navigate("/home");
       })
       .catch(() => {
-        console.log('sign out error');
+        console.log("sign out error");
       });
   };
 

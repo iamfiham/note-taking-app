@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import ZoomUi from "./ZoomUi";
 import PlaceHolderCollection from "./placeHolders/PlaceHolderCollection";
 import { motion, AnimatePresence } from "framer-motion";
+import useCalculation from "../hooks/useCalculation";
 
 const portalDom = document.getElementById("portal");
 
@@ -16,7 +17,7 @@ function NoteList() {
   const [isDeleteModelOpen, setIsDeleteModelOpen] = useState(false);
   const [idOfDeleteNote, setIdOfDeleteNote] = useState("");
   const [renderNotes, setRenderNotes] = useState([]);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const { isTouchDevice } = useCalculation();
   const debounceTimeout = useRef(null);
 
   const fuseOptions = {
@@ -38,7 +39,6 @@ function NoteList() {
       if (debounceTimeout.current) {
         clearTimeout(debounceTimeout.current);
       }
-
       debounceTimeout.current = setTimeout(() => {
         setRenderNotes(() => {
           return fuse.search(searchTerm).map((result) => result.item);
@@ -50,29 +50,6 @@ function NoteList() {
       clearTimeout(debounceTimeout.current);
     };
   }, [searchTerm, isFetchLoading]);
-
-  useEffect(() => {
-    function checkTouchDevice() {
-      if (
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      ) {
-        setIsTouchDevice(true);
-        return;
-      }
-      if (window.DocumentTouch && document instanceof DocumentTouch) {
-        setIsTouchDevice(true);
-        return;
-      }
-      if ("ontouchstart" in document.documentElement) {
-        setIsTouchDevice(true);
-        return;
-      }
-      setIsTouchDevice(false);
-    }
-    checkTouchDevice();
-  }, []);
 
   const instructions = {
     noNotes: {
@@ -115,20 +92,15 @@ function NoteList() {
 
   return (
     <div className="note-list-wrapper">
-      {createPortal(
-        <AnimatePresence>
-          {isDeleteModelOpen && (
-            <DeleteModel
-              key={idOfDeleteNote}
-              idOfDeleteNote={idOfDeleteNote}
-              setIsDeleteModelOpen={setIsDeleteModelOpen}
-            />
-          )}
-        </AnimatePresence>,
-        portalDom,
-      )}
-
-      {!isFetchLoading && renderNotes.length !== 0 && (
+      {isFetchLoading ? (
+        <PlaceHolderCollection />
+      ) : renderNotes.length == 0 ? (
+        searchTerm.trim() === "" ? (
+          <ZoomUi {...instructions.noNotes} />
+        ) : (
+          <ZoomUi {...instructions.noResult} />
+        )
+      ) : (
         <motion.div
           initial="hidden"
           animate="visible"
@@ -159,16 +131,18 @@ function NoteList() {
           ))}
         </motion.div>
       )}
-
-      {isFetchLoading ? (
-        <PlaceHolderCollection />
-      ) : renderNotes.length == 0 ? (
-        searchTerm.trim() === "" ? (
-          <ZoomUi {...instructions.noNotes} />
-        ) : (
-          <ZoomUi {...instructions.noResult} />
-        )
-      ) : null}
+      {createPortal(
+        <AnimatePresence>
+          {isDeleteModelOpen && (
+            <DeleteModel
+              key={idOfDeleteNote}
+              idOfDeleteNote={idOfDeleteNote}
+              setIsDeleteModelOpen={setIsDeleteModelOpen}
+            />
+          )}
+        </AnimatePresence>,
+        portalDom,
+      )}
     </div>
   );
 }

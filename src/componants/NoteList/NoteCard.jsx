@@ -61,7 +61,7 @@ function NoteCard({
               exit="exit"
               transition={transitionSettings}
               variants={animation}
-              className="shadow-tooltip absolute right-0 top-0 origin-top-right rounded-md border border-solid border-neutral-200 bg-white p-1"
+              className="absolute right-0 top-0 origin-top-right rounded-md border border-solid border-neutral-200 bg-white p-1 shadow-tooltip"
               ref={toolBar}
             >
               <Link to={`/view/${id}`}>
