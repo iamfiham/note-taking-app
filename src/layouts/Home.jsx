@@ -29,8 +29,15 @@ function Home() {
 
   return (
     // <div className="relative mt-16 flex flex-col items-center sm:mt-28">
-    <div className="relative mt-16 flex flex-col items-center sm:mt-1">
-      <img src={peeps} alt="A man" className="left-0 top-1/2 mb-8 w-56" />
+    <div className="relative flex flex-col items-center">
+      <motion.img
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ease: "easeOut", duration: 0.35 }}
+        src={peeps}
+        alt="A man"
+        className="mb-6 w-44 sm:w-56"
+      />
 
       <motion.h2
         initial="hidden"
