@@ -7,7 +7,6 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { DataProvider } from "../context/Context";
 
 import "./CreateNote.scss";
-import Loader from "../componants/Loader/Loader";
 import useStoreData from "../hooks/useStoreData";
 import { motion } from "framer-motion";
 
@@ -46,8 +45,13 @@ function EditNote() {
     }
     await editFirbaseDoc(id, title, text);
     setIsButtonDisabled(false);
-    navigate("/");
+    navigate(-1);
   };
+
+  const backButton = () => {
+    navigate(-1);
+  };
+
   const animation = {
     visible: { opacity: 1, y: 0, willChange: "opacity, transform" },
     hidden: { opacity: 0, y: -5, willChange: "opacity, transform" },
@@ -95,11 +99,9 @@ function EditNote() {
           <button onSubmit={submit} disabled={isButtonDisabled}>
             Save Changes
           </button>
-          <Link to="/">
-            <button className="back-button" type="button">
-              Back
-            </button>
-          </Link>
+          <button onClick={backButton} className="back-button" type="button">
+            Back
+          </button>
         </div>
       </form>
     </motion.div>

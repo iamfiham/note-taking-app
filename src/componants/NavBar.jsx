@@ -86,9 +86,11 @@ function NavBar() {
               to="/create"
               className="fixed bottom-8 right-8 sm:bottom-16 sm:right-16"
             >
-              <button className="flex cursor-pointer items-center gap-2 rounded-full bg-neutral-900 py-3 pl-4 pr-6 text-sm font-medium text-neutral-100 transition-all hover:bg-neutral-800">
+              <button className="flex cursor-pointer items-center gap-2 rounded-full bg-neutral-900 p-3 text-sm font-medium text-neutral-100 transition-all hover:bg-neutral-800 sm:py-3 sm:pl-4 sm:pr-6">
                 <FaPlus className="inline-block fill-neutral-100 text-base/none" />
-                New note
+                <span className="hidden text-sm font-medium text-neutral-100 sm:inline">
+                  New note
+                </span>
               </button>
             </Link>
           )}

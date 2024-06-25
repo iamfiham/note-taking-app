@@ -1,6 +1,6 @@
 function ProductCardPlaceHolder() {
   return (
-    <div className="flex h-[330px] flex-col gap-2 rounded-md border border-solid border-neutral-100 bg-white p-6 py-8 shadow-n1">
+    <div className="flex h-[330px] flex-col gap-2 rounded-md border border-solid border-neutral-200 bg-white p-6 py-8">
       <h4 className="mb-6 h-6 w-full animate-skeleton rounded bg-neutral-100 bg-skeletonGradiant bg-200"></h4>
       <p className="animation-delay-50 h-4 w-4/5 animate-skeleton rounded bg-neutral-100 bg-skeletonGradiant bg-200"></p>
       <p className="h-4 w-full animate-skeleton rounded bg-neutral-100 bg-skeletonGradiant bg-200 animation-delay-150"></p>
