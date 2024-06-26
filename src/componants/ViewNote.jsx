@@ -57,14 +57,19 @@ function ViewNote() {
     >
       <ul className="mb-8 flex items-center gap-2">
         <Link to={backButtonRoute}>
-          <button className="flex items-center gap-1 rounded-full p-2 text-base/none font-medium text-neutral-500 hover:bg-neutral-50">
-            <IoIosArrowBack className="fill-neutral-500" />
-            back
+          <button className="group flex items-center gap-1 text-base/none font-medium text-neutral-500">
+            <IoIosArrowBack className="fill-neutral-400" />
+            <span className="border-0 border-b border-solid border-transparent leading-tight transition-all group-hover:border-neutral-400">
+              back
+            </span>
           </button>
         </Link>
         <Link to={`/edit/${id}`} className="ml-auto">
-          <li className="cursor-pointer rounded-lg p-2 text-sm/none font-medium transition-all hover:bg-neutral-100">
-            <FiEdit2 className="stroke-neutral-500 text-base/none" />
+          <li
+            className="cursor-pointer rounded-lg p-2 text-sm/none font-medium transition-all hover:bg-neutral-100"
+            title="Edit Note"
+          >
+            <FiEdit2 className="stroke-neutral-400 text-base/none" />
           </li>
         </Link>
         <li
@@ -73,8 +78,9 @@ function ViewNote() {
             setIsDeleteModelOpen(true);
           }}
           className="cursor-pointer rounded-lg p-2 text-sm/none font-medium transition-all hover:bg-neutral-100"
+          title="Delete Note"
         >
-          <RiDeleteBin7Line className="fill-neutral-500 text-base/none" />
+          <RiDeleteBin7Line className="fill-neutral-400 text-base/none" />
         </li>
       </ul>
       <motion.p

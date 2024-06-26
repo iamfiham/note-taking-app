@@ -42,7 +42,7 @@ function NavBar() {
   return (
     <>
       <div
-        className={`${hasBoxShadow && "shadow-n1"} sticky top-0 z-[99] border-0 border-b border-solid border-neutral-100 bg-white transition-all`}
+        className={`${hasBoxShadow && "border-b"} sticky top-0 z-[99] border-0 border-solid border-neutral-200 bg-white transition-all`}
       >
         <div className="relative mx-auto flex w-[min(1280px,_92%)] items-center justify-between gap-4 bg-white py-3">
           <AnimatePresence>

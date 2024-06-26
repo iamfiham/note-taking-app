@@ -11,10 +11,12 @@ function SignUpPage({ children }) {
 
   return (
     <div className="sign-in-page relative grid place-items-center">
-      <Link to={backButtonRoute}>
-        <button className="absolute -top-12 left-0 flex items-center gap-1 rounded-full p-1 pl-1 pr-2 text-base/none font-medium text-neutral-500 hover:bg-neutral-50">
-          <IoIosArrowBack className="fill-neutral-500" />
-          back
+      <Link to={backButtonRoute} className="justify-self-start">
+        <button className="group mb-8 flex items-center gap-1 text-base/none font-medium text-neutral-500">
+          <IoIosArrowBack className="fill-neutral-400" />
+          <span className="border-0 border-b border-solid border-transparent leading-tight transition-all group-hover:border-neutral-400">
+            back
+          </span>
         </button>
       </Link>
       {isLogIn ? (
