@@ -101,7 +101,7 @@ export default function SignInForm() {
         </button>
       </div>
       <div className="relative mb-4 h-[1px] bg-neutral-200">
-        <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-sm text-neutral-500">
+        <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap bg-white px-2 text-sm text-neutral-500">
           or continue with email
         </p>
       </div>
